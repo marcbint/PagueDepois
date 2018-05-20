@@ -11,6 +11,7 @@ using System.Windows.Forms;
 using Repositorio;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
+using Repositorio.Enum;
 
 namespace WinFormsPagueDepois
 {
@@ -18,6 +19,9 @@ namespace WinFormsPagueDepois
     {
         public int idRegistro;
         public string loginInicial;
+        Situacao situacao;
+
+
         public frmRegistro()
         {
             InitializeComponent();
@@ -25,6 +29,9 @@ namespace WinFormsPagueDepois
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
+            Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+            int valueSituacao = (int)situacao;
+
             errorProvider1.Clear();
             if (txtNome.Text == string.Empty)
             {
@@ -54,7 +61,8 @@ namespace WinFormsPagueDepois
                     user.Login = txtLogin.Text;
                     user.Nome = txtNome.Text;
                     user.Senha = txtSenha.Text;
-                    user.Status = retornaStatus();
+                    //user.Status = retornaStatus();
+                    user.Status = situacao;
                     usuarioRepo.Inserir(user);
                 }
                 catch (Exception ex)
@@ -88,6 +96,9 @@ namespace WinFormsPagueDepois
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+            int valueSituacao = (int)situacao;
+
             if (txtNome.Text == string.Empty)
             {
                 errorProvider1.SetError(txtNome, "Informe o nome do usuário");
@@ -114,7 +125,8 @@ namespace WinFormsPagueDepois
                 user.Login = txtLogin.Text;
                 user.Nome = txtNome.Text;
                 user.Senha = txtSenha.Text;
-                user.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                //user.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                user.Status = situacao;
                 //usuarioRepo.Inserir(user);
 
                 if (user.Id == 0)
@@ -176,6 +188,9 @@ namespace WinFormsPagueDepois
             if (result3 == DialogResult.Yes)
             {
 
+                Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+                int valueSituacao = (int)situacao;
+
                 UsuarioRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio<Usuario>();
 
                 try
@@ -186,8 +201,8 @@ namespace WinFormsPagueDepois
                     usuario.Nome = txtNome.Text;
                     usuario.Login = txtLogin.Text;
                     usuario.Senha = txtSenha.Text;
-                    usuario.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
-
+                    //usuario.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                    usuario.Status = situacao;
 
                     usuarioRepo.Excluir(usuario);
                     MessageBox.Show("Exclusão realizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -205,6 +220,8 @@ namespace WinFormsPagueDepois
 
         private void frmRegistro_Load(object sender, EventArgs e)
         {
+            LoadSituacaoCombo<Situacao>(cboStatus);
+
             if (idRegistro >= 1)
             {
 
@@ -213,7 +230,8 @@ namespace WinFormsPagueDepois
                 txtNome.Text = usuario.Nome;
                 txtLogin.Text = usuario.Login;
                 txtSenha.Text = usuario.Senha;
-                cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(usuario.Status);
+                //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(usuario.Status);
+                cboStatus.Text = usuario.Status.ToString();
 
                 loginInicial = usuario.Login;
 
@@ -225,6 +243,21 @@ namespace WinFormsPagueDepois
                 btnExcluir.Visible = false;
                 btnSalvar.Visible = true;
             }
+        }
+
+        public static void LoadSituacaoCombo<T>(ComboBox cbo)
+        {
+            cbo.DataSource = Enum.GetValues(typeof(T))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbo.DisplayMember = "Description";
+            cbo.ValueMember = "value";
         }
     }
 }

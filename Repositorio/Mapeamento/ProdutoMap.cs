@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using FluentNHibernate.Mapping;
 using Repositorio.Entidades;
+using Repositorio.Enum;
 
 namespace Repositorio.Mapeamento
 {
@@ -17,7 +18,8 @@ namespace Repositorio.Mapeamento
             Map(c => c.Codigo);
             Map(c => c.Descricao);
             Map(c => c.Valor);
-            Map(c => c.Status);
+            //Map(c => c.Status);
+            Map(c => c.Status).CustomType<Situacao>();
             Table("produtos");
         }
     }

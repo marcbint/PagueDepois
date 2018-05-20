@@ -12,7 +12,7 @@ namespace Repositorio
 {
     public class SessionFactory
     {
-        private static string ConnectionString = "Server=127.0.0.1; Port=5433; User Id=postgres; Password=casa2010; Database=paguedepois";
+        private static string ConnectionString = "Server=127.0.0.1; Port=5432; User Id=postgres; Password=casa2010; Database=paguedepois";
         private static ISessionFactory session;
 
         public static ISessionFactory CriarSession()

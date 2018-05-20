@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 using Repositorio.Entidades;
 using FluentNHibernate.Mapping;
+using Repositorio.Enum;
 
 namespace Repositorio.Mapeamento
 {
@@ -17,7 +18,8 @@ namespace Repositorio.Mapeamento
             Map(c => c.Nome);
             Map(c => c.Login);
             Map(c => c.Senha);
-            Map(c => c.Status);
+            //Map(c => c.Status);
+            Map(c => c.Status).CustomType<Situacao>();
             Table("usuarios");
         }
     }

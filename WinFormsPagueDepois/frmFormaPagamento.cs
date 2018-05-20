@@ -11,11 +11,15 @@ using System.Windows.Forms;
 using Repositorio;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
+using Repositorio.Enum;
 
 namespace WinFormsPagueDepois
 {
     public partial class frmFormaPagamento : Form
     {
+        Situacao situacao;
+
+
         public int idFormaPagamento;
 
         public frmFormaPagamento()
@@ -25,6 +29,8 @@ namespace WinFormsPagueDepois
 
         private void frmFormaPagamento_Load(object sender, EventArgs e)
         {
+            LoadSituacaoCombo<Situacao>(cboStatus);
+
             if (idFormaPagamento >= 1)
             {
 
@@ -32,8 +38,9 @@ namespace WinFormsPagueDepois
                 var formaPagamento = formaPagamentoRepo.RetornarPorId(idFormaPagamento);
                 txtDescricao.Text = formaPagamento.Descricao;
                 cboTipo.Text = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoConsulta(formaPagamento.Tipo);
-                cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(formaPagamento.Status);
-                
+                //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(formaPagamento.Status);
+                cboStatus.Text = formaPagamento.Status.ToString();
+
                 btnExcluir.Visible = true;
             }
             else
@@ -44,6 +51,9 @@ namespace WinFormsPagueDepois
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+            int valueSituacao = (int)situacao;
+
             errorProvider1.Clear();
             if (txtDescricao.Text == string.Empty)
             {
@@ -70,7 +80,8 @@ namespace WinFormsPagueDepois
                 formaPagamento.Id = idFormaPagamento;
                 formaPagamento.Descricao = txtDescricao.Text;
                 formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
-                formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                //formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                formaPagamento.Status = situacao;
 
                 if (formaPagamento.Id == 0)
                 {
@@ -102,6 +113,8 @@ namespace WinFormsPagueDepois
 
             if (result3 == DialogResult.Yes)
             {
+                Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+                int valueSituacao = (int)situacao;
 
                 FormaPagamentoRepositorio<FormaPagamento> formaPagamentoRepo = new FormaPagamentoRepositorio<FormaPagamento>();
 
@@ -112,8 +125,8 @@ namespace WinFormsPagueDepois
                     formaPagamento.Id = idFormaPagamento;
                     formaPagamento.Descricao = txtDescricao.Text;
                     formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
-                    formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
-
+                    //formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                    formaPagamento.Status = situacao;
 
                     formaPagamentoRepo.Excluir(formaPagamento);
                     MessageBox.Show("Exclusão realizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -132,6 +145,21 @@ namespace WinFormsPagueDepois
         private void btnSair_Click(object sender, EventArgs e)
         {
             this.Close();
+        }
+
+        public static void LoadSituacaoCombo<T>(ComboBox cbo)
+        {
+            cbo.DataSource = Enum.GetValues(typeof(T))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbo.DisplayMember = "Description";
+            cbo.ValueMember = "value";
         }
     }
 }

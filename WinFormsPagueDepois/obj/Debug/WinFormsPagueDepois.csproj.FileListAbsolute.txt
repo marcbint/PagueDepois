@@ -35,3 +35,37 @@ C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\WinFormsPague
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.csproj.GenerateResource.Cache
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.exe
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.pdb
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\WinFormsPagueDepois.exe.config
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\WinFormsPagueDepois.exe
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\WinFormsPagueDepois.pdb
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\FluentNHibernate.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Iesi.Collections.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\NHibernate.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Npgsql.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Repositorio.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Repositorio.pdb
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Repositorio.dll.config
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\FluentNHibernate.xml
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Iesi.Collections.xml
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\NHibernate.xml
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\Npgsql.xml
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.csprojResolveAssemblyReference.cache
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmCliente.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmClienteCon.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmFormaPagamento.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmFormaPagamentoCon.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmLogin.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmMenu.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmPedido.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmPedidoCon.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmProdutoCon.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmProduto.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmRegistro.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.frmRegistroCon.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.Properties.Resources.resources
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.csproj.GenerateResource.Cache
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.csproj.CoreCompileInputs.cache
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.exe
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.pdb
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\System.Threading.Tasks.Extensions.xml

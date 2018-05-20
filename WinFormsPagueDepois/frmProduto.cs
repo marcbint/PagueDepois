@@ -10,13 +10,15 @@ using System.Windows.Forms;
 using Repositorio;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
+using Repositorio.Enum;
 
 namespace WinFormsPagueDepois
 {
     public partial class frmProduto : Form
     {
         public int idProduto;
-       
+        Situacao situacao;
+
 
         public frmProduto()
         {
@@ -26,6 +28,9 @@ namespace WinFormsPagueDepois
 
         private void btnIncluir_Click(object sender, EventArgs e)
         {
+            Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+            int valueSituacao = (int)situacao;
+
             errorProvider1.Clear();
             if (txtDescricao.Text == string.Empty)
             {
@@ -51,7 +56,8 @@ namespace WinFormsPagueDepois
                 produto.Codigo = txtCodigo.Text;
                 produto.Descricao = txtDescricao.Text;
                 produto.Valor = Convert.ToDecimal(txtValor.Text);
-                produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                //produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                produto.Status = situacao;
                 produtoRepo.Inserir(produto);
                    
                 }
@@ -65,14 +71,17 @@ namespace WinFormsPagueDepois
      
         private void frmProduto_Load(object sender, EventArgs e)
         {
-            if(idProduto >= 1){
+            LoadSituacaoCombo<Situacao>(cboStatus);
+
+            if (idProduto >= 1){
 
                 ProdutoRepositorio<Produto> produtoRepo = new ProdutoRepositorio<Produto>();
                 var produto = produtoRepo.RetornarPorId(idProduto);
                 txtCodigo.Text = produto.Codigo;
                 txtDescricao.Text = produto.Descricao;
                 txtValor.Text = Convert.ToString(produto.Valor);
-                cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(produto.Status);
+                //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(produto.Status);
+                cboStatus.Text = produto.Status.ToString();
 
                 btnIncluir.Visible = false;
                 btnExcluir.Visible = true;
@@ -93,6 +102,9 @@ namespace WinFormsPagueDepois
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
+            Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+            int valueSituacao = (int)situacao;
+
             errorProvider1.Clear();
             if (txtDescricao.Text == string.Empty)
             {
@@ -120,9 +132,10 @@ namespace WinFormsPagueDepois
                 produto.Codigo = txtCodigo.Text;
                 produto.Descricao = txtDescricao.Text;
                 produto.Valor = Convert.ToDecimal(txtValor.Text);
-                produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                //produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                produto.Status = situacao;
 
-                if(produto.Id == 0)
+                if (produto.Id == 0)
                 {
                     produtoRepo.Inserir(produto);
                     MessageBox.Show("Cadastro realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -154,6 +167,8 @@ namespace WinFormsPagueDepois
 
             if(result3 == DialogResult.Yes)
             {
+                Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
+                int valueSituacao = (int)situacao;
 
                 ProdutoRepositorio<Produto> produtoRepo = new ProdutoRepositorio<Produto>();
 
@@ -165,9 +180,9 @@ namespace WinFormsPagueDepois
                     produto.Codigo = txtCodigo.Text;
                     produto.Descricao = txtDescricao.Text;
                     produto.Valor = Convert.ToDecimal(txtValor.Text);
-                    produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                    //produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
+                    produto.Status = situacao;
 
-               
                     produtoRepo.Excluir(produto);
                     MessageBox.Show("Exclusão realizada com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     this.Close();
@@ -184,7 +199,20 @@ namespace WinFormsPagueDepois
         }
 
 
-
+        public static void LoadSituacaoCombo<T>(ComboBox cbo)
+        {
+            cbo.DataSource = Enum.GetValues(typeof(T))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbo.DisplayMember = "Description";
+            cbo.ValueMember = "value";
+        }
 
 
     }

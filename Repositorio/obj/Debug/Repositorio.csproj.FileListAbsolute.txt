@@ -19,3 +19,20 @@ C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\Repositorio\b
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\Repositorio\obj\Debug\Repositorio.dll
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\Repositorio\obj\Debug\Repositorio.pdb
 C:\Users\Marcelo\Documents\Visual Studio 2015\Projects\PagueDepois\Repositorio\obj\Debug\Repositorio.csprojResolveAssemblyReference.cache
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Repositorio.dll.config
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Repositorio.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Repositorio.pdb
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\FluentNHibernate.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Iesi.Collections.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\NHibernate.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Npgsql.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\FluentNHibernate.xml
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Iesi.Collections.xml
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\NHibernate.xml
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\Npgsql.xml
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.csproj.CoreCompileInputs.cache
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.pdb
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.csprojResolveAssemblyReference.cache
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\System.Threading.Tasks.Extensions.dll
+C:\Users\b1204126\source\repos\PagueDepois\Repositorio\bin\Debug\System.Threading.Tasks.Extensions.xml

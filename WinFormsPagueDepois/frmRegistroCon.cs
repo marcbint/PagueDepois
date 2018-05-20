@@ -31,56 +31,63 @@ namespace WinFormsPagueDepois
 
         private void criaDataGrid()
         {
+            UsuarioRepositorio<Usuario> repositorio = new UsuarioRepositorio<Usuario>();
+            IList<Usuario> objeto = repositorio.Consultar();
 
-            UsuarioRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio<Usuario>();
-            dgvRegistros.DataSource = usuarioRepo.Consultar();
-            //dgvRegistros.ColumnCount = 5;
+            var lista = objeto.Select(s => new {
+                Id      = s.Id,
+                Nome    = s.Nome,
+                Login   = s.Login,
+                Senha   = s.Senha,
+                Status  = s.Status
+            }
+                                        ).OrderBy(x => x.Nome)
+                                                     //.Sum(item => item.valor)
+                                                     //.GroupBy(x => x.Id)
+                                                     .ToList();
 
-            dgvRegistros.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
+            dgvRegistros.DataSource = lista;
+
+            //Cria as colunas
+            //DataGridViewCheckBoxColumn colChk = new DataGridViewCheckBoxColumn(); Deve ser criado pela tela
+            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colNome = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colLogin = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colSenha = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colSituacao = new DataGridViewTextBoxColumn();
+
+            //Nomeia os cabeçalhos
+            dgvRegistros.Columns[0].HeaderText = "Id";
+            dgvRegistros.Columns[1].HeaderText = "Nome";
+            dgvRegistros.Columns[2].HeaderText = "Login";
+            dgvRegistros.Columns[3].HeaderText = "Senha";
+            dgvRegistros.Columns[4].HeaderText = "Situação";
+
+            //Cores
+            dgvRegistros.GridColor = Color.Black;
+            dgvRegistros.ForeColor = Color.Black;
+
+
+            this.dgvRegistros.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvRegistros.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvRegistros.MultiSelect = false;
+            this.dgvRegistros.Dock = DockStyle.Fill;
+
+            //Já Existentes
+            dgvRegistros.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
             dgvRegistros.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvRegistros.ColumnHeadersDefaultCellStyle.Font =
-                new Font(dgvRegistros.Font, FontStyle.Bold);
+            dgvRegistros.ColumnHeadersDefaultCellStyle.Font = new Font(dgvRegistros.Font, FontStyle.Bold);
+            dgvRegistros.ForeColor = Color.Black;
+
 
             dgvRegistros.Name = "dgvRegistros";
             dgvRegistros.Location = new Point(8, 8);
             dgvRegistros.Size = new Size(500, 250);
-            dgvRegistros.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            dgvRegistros.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
+            dgvRegistros.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dgvRegistros.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvRegistros.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            dgvRegistros.GridColor = Color.Black;
             dgvRegistros.RowHeadersVisible = false;
 
-            // NOMES DA COLUNA
-            /*dgvRegistros.Columns[0].HeaderText = "ID";
-            dgvRegistros.Columns[1].HeaderText = "CÓDIGO";
-            dgvRegistros.Columns[2].HeaderText = "DESCRIÇÃO";
-            dgvRegistros.Columns[3].HeaderText = "VALOR";
-            dgvRegistros.Columns[4].HeaderText = "STATUS";*/
-
-
-
-            /*
-            dgvRegistros.Columns[0].Name = "Column1";
-            dgvRegistros.Columns[1].Name = "teste2";
-            dgvRegistros.Columns[2].Name = "Title";
-            dgvRegistros.Columns[3].Name = "Artist";
-            dgvRegistros.Columns[4].Name = "Album";
-
-            dgvRegistros.Columns[4].DefaultCellStyle.Font =
-                new Font(dgvRegistros.DefaultCellStyle.Font, FontStyle.Italic);
-            dgvRegistros.Columns[4].HeaderText = "teste";
-            */
-
-            dgvRegistros.SelectionMode =
-        DataGridViewSelectionMode.FullRowSelect;
-            dgvRegistros.MultiSelect = false;
-            dgvRegistros.Dock = DockStyle.Fill;
-
-            /*dgvRegistros.CellFormatting += new
-                DataGridViewCellFormattingEventHandler(
-                dgvRegistros_CellFormatting);*/
 
 
         }

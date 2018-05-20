@@ -53,9 +53,10 @@ namespace WinFormsPagueDepois
             frmProduto frmProduto = new frmProduto();
             frmProduto.idProduto = Convert.ToInt32(id);
             frmProduto.ShowDialog();
-            
+
             //Remonta o grid apos o process de edição ou exclusao.
-            ExibirProdutos();
+            //ExibirProdutos();
+            criaDataGrid();
 
             
 
@@ -63,59 +64,64 @@ namespace WinFormsPagueDepois
 
         private void criaDataGrid() {
 
-            ProdutoRepositorio<Produto> produtoRepo = new ProdutoRepositorio<Produto>();
-            dgvProdutos.DataSource = produtoRepo.Consultar();
-            //dgvProdutos.ColumnCount = 5;
+            ProdutoRepositorio<Produto> repositorio = new ProdutoRepositorio<Produto>();
+            IList<Produto> objeto = repositorio.Consultar();
 
-            dgvProdutos.ColumnHeadersDefaultCellStyle.BackColor = Color.Navy;
-            dgvProdutos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
-            dgvProdutos.ColumnHeadersDefaultCellStyle.Font =
-                new Font(dgvProdutos.Font, FontStyle.Bold);
+            var lista = objeto.Select(s => new {
+                Id          = s.Id,
+                Codigo      = s.Codigo,
+                Descricao   = s.Descricao,
+                Valor       = s.Valor,
+                Status      = s.Status
+            }
+                                        ).OrderBy(x => x.Descricao)
+                                                     //.Sum(item => item.valor)
+                                                     //.GroupBy(x => x.Id)
+                                                     .ToList();
+
+            dgvProdutos.DataSource = repositorio.Consultar();
+
+
+            //Cria as colunas
+            //DataGridViewCheckBoxColumn colChk = new DataGridViewCheckBoxColumn(); Deve ser criado pela tela
+            DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colCodigo = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colDescricao = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colValor = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colSituacao = new DataGridViewTextBoxColumn();
+
+
+            //Nomeia os cabeçalhos
+            dgvProdutos.Columns[0].HeaderText = "Id";
+            dgvProdutos.Columns[1].HeaderText = "Código";
+            dgvProdutos.Columns[2].HeaderText = "Descrição";
+            dgvProdutos.Columns[3].HeaderText = "Valor";
+            dgvProdutos.Columns[4].HeaderText = "Situação";
+
+            //Cores
             dgvProdutos.GridColor = Color.Black;
             dgvProdutos.ForeColor = Color.Black;
 
+            
+            //Já Existentes
+            dgvProdutos.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dgvProdutos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvProdutos.ColumnHeadersDefaultCellStyle.Font = new Font(dgvProdutos.Font, FontStyle.Bold);
+            dgvProdutos.ForeColor = Color.Black;
 
+            //Propriedades
             dgvProdutos.Name = "dgvProdutos";
             dgvProdutos.Location = new Point(8, 8);
             dgvProdutos.Size = new Size(500, 250);
-            dgvProdutos.AutoSizeRowsMode =
-                DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
-            dgvProdutos.ColumnHeadersBorderStyle =
-                DataGridViewHeaderBorderStyle.Single;
+            dgvProdutos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dgvProdutos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
             dgvProdutos.CellBorderStyle = DataGridViewCellBorderStyle.Single;
-            
             dgvProdutos.RowHeadersVisible = false;
-            
 
-            // NOMES DA COLUNA
-            dgvProdutos.Columns[0].HeaderText = "ID";
-            dgvProdutos.Columns[1].HeaderText = "CÓDIGO";
-            dgvProdutos.Columns[2].HeaderText = "DESCRIÇÃO";
-            dgvProdutos.Columns[3].HeaderText = "VALOR";
-            dgvProdutos.Columns[4].HeaderText = "STATUS";
-
-            
-
-
-            dgvProdutos.Columns[0].Name = "Column1";
-            dgvProdutos.Columns[1].Name = "teste2";
-            dgvProdutos.Columns[2].Name = "Title";
-            dgvProdutos.Columns[3].Name = "Artist";
-            dgvProdutos.Columns[4].Name = "Album";
-            dgvProdutos.Columns[4].DefaultCellStyle.Font =
-                new Font(dgvProdutos.DefaultCellStyle.Font, FontStyle.Italic);
-            dgvProdutos.Columns[4].HeaderText = "teste";
-
-            dgvProdutos.SelectionMode =
-        DataGridViewSelectionMode.FullRowSelect;
-            dgvProdutos.MultiSelect = false;
-            dgvProdutos.Dock = DockStyle.Fill;
-
-            /*dgvProdutos.CellFormatting += new
-                DataGridViewCellFormattingEventHandler(
-                dgvProdutos_CellFormatting);*/
-
-
+            this.dgvProdutos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvProdutos.MultiSelect = false;
+            this.dgvProdutos.Dock = DockStyle.Fill;
         }
 
         private void btnGet_Click(object sender, EventArgs e)
@@ -138,7 +144,8 @@ namespace WinFormsPagueDepois
         {
             frmProduto frmProduto = new frmProduto();
             frmProduto.ShowDialog();
-            ExibirProdutos();
+            //ExibirProdutos();
+            criaDataGrid();
 
         }
 
