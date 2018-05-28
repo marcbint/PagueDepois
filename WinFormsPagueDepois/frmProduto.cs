@@ -11,6 +11,8 @@ using Repositorio;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
 using Repositorio.Enum;
+using WinFormsPagueDepois.Helpers;
+using System.Globalization;
 
 namespace WinFormsPagueDepois
 {
@@ -53,7 +55,7 @@ namespace WinFormsPagueDepois
                 {
                     Produto produto = new Produto();
 
-                produto.Codigo = txtCodigo.Text;
+                produto.Codigo = txtCodigo.Text.Trim();
                 produto.Descricao = txtDescricao.Text;
                 produto.Valor = Convert.ToDecimal(txtValor.Text);
                 //produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
@@ -79,7 +81,8 @@ namespace WinFormsPagueDepois
                 var produto = produtoRepo.RetornarPorId(idProduto);
                 txtCodigo.Text = produto.Codigo;
                 txtDescricao.Text = produto.Descricao;
-                txtValor.Text = Convert.ToString(produto.Valor);
+                //txtValor.Text = Convert.ToString(produto.Valor);
+                txtValor.Text = produto.Valor.ToString("N2", CultureInfo.CurrentCulture);
                 //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(produto.Status);
                 cboStatus.Text = produto.Status.ToString();
 
@@ -129,7 +132,7 @@ namespace WinFormsPagueDepois
                 Produto produto = new Produto();
 
                 produto.Id = idProduto;
-                produto.Codigo = txtCodigo.Text;
+                produto.Codigo = txtCodigo.Text.Trim();
                 produto.Descricao = txtDescricao.Text;
                 produto.Valor = Convert.ToDecimal(txtValor.Text);
                 //produto.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
@@ -214,6 +217,15 @@ namespace WinFormsPagueDepois
             cbo.ValueMember = "value";
         }
 
+        private void txtValor_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidaTexto.SomenteNumeros(sender, e);
+        }
 
+        private void txtValor_TextChanged(object sender, EventArgs e)
+        {
+            TextBox txt = (TextBox)sender;
+            ValidaTexto.Moeda(ref txt);
+        }
     }
 }

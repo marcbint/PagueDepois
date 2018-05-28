@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Repositorio;
 using Repositorio.Entidades;
+using System.Globalization;
 
 namespace WinFormsPagueDepois
 {
@@ -90,13 +91,15 @@ namespace WinFormsPagueDepois
             DataGridViewTextBoxColumn colValor = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn colSituacao = new DataGridViewTextBoxColumn();
 
-
             //Nomeia os cabeçalhos
             dgvProdutos.Columns[0].HeaderText = "Id";
             dgvProdutos.Columns[1].HeaderText = "Código";
             dgvProdutos.Columns[2].HeaderText = "Descrição";
             dgvProdutos.Columns[3].HeaderText = "Valor";
             dgvProdutos.Columns[4].HeaderText = "Situação";
+
+            //Formata exibição do dado na coluna
+            dgvProdutos.Columns[3].DefaultCellStyle.Format = "N2";
 
             //Cores
             dgvProdutos.GridColor = Color.Black;
@@ -122,6 +125,8 @@ namespace WinFormsPagueDepois
             this.dgvProdutos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvProdutos.MultiSelect = false;
             this.dgvProdutos.Dock = DockStyle.Fill;
+
+            
         }
 
         private void btnGet_Click(object sender, EventArgs e)

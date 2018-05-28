@@ -69,3 +69,4 @@ C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinForm
 C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.pdb
 C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\System.Threading.Tasks.Extensions.dll
 C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\bin\Debug\System.Threading.Tasks.Extensions.xml
+C:\Users\b1204126\source\repos\PagueDepois\WinFormsPagueDepois\obj\Debug\WinFormsPagueDepois.csproj.CopyComplete

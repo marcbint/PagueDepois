@@ -131,6 +131,8 @@
             this.txtValor.Size = new System.Drawing.Size(228, 26);
             this.txtValor.TabIndex = 1;
             this.txtValor.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.txtValor.TextChanged += new System.EventHandler(this.txtValor_TextChanged);
+            this.txtValor.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtValor_KeyPress);
             // 
             // txtCodigo
             // 

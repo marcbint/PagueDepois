@@ -116,14 +116,34 @@ namespace WinFormsPagueDepois
             dgvPedidos.Columns[4].HeaderText = "Valor";
             dgvPedidos.Columns[5].HeaderText = "Situação";
 
+            //Formata exibição do dado na coluna
+            dgvPedidos.Columns[4].DefaultCellStyle.Format = "N2";
+
             //Cores
             dgvPedidos.GridColor = Color.Black;
             dgvPedidos.ForeColor = Color.Black;
+            
 
+            //Já Existentes
+            dgvPedidos.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dgvPedidos.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvPedidos.ColumnHeadersDefaultCellStyle.Font = new Font(dgvPedidos.Font, FontStyle.Bold);
+            dgvPedidos.ForeColor = Color.Black;
+
+
+            //Propriedades
+            dgvPedidos.Name = "dgvPedidos";
+            dgvPedidos.Location = new Point(8, 8);
+            dgvPedidos.Size = new Size(500, 250);
+            dgvPedidos.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dgvPedidos.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvPedidos.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvPedidos.RowHeadersVisible = false;
 
             this.dgvPedidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPedidos.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-
+            this.dgvPedidos.MultiSelect = false;
+            this.dgvPedidos.Dock = DockStyle.Fill;
 
         }
 
