@@ -101,19 +101,23 @@ namespace WinFormsPagueDepois
         {
 
             int index = e.RowIndex;
-            DataGridViewRow selectedRow = dgvFormasPagamento.Rows[index];
 
-            string id = selectedRow.Cells[0].Value.ToString();
+            //Se for diferente do cabeçalho
+            if (index != -1)
+            {
+                DataGridViewRow selectedRow = dgvFormasPagamento.Rows[index];
 
-            //Abre a tela em processo de edição
-            frmFormaPagamento frmFormaPagamento = new frmFormaPagamento();
-            frmFormaPagamento.idFormaPagamento = Convert.ToInt32(id);
-            frmFormaPagamento.ShowDialog();
+                string id = selectedRow.Cells[0].Value.ToString();
 
-            //Remonta o grid apos o process de edição ou exclusao.
-            //ExibirProdutos();
-            criaDataGrid();
+                //Abre a tela em processo de edição
+                frmFormaPagamento frmFormaPagamento = new frmFormaPagamento();
+                frmFormaPagamento.idFormaPagamento = Convert.ToInt32(id);
+                frmFormaPagamento.ShowDialog();
 
+                //Remonta o grid apos o process de edição ou exclusao.
+                //ExibirProdutos();
+                criaDataGrid();
+            }
 
 
         }

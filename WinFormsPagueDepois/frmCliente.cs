@@ -49,6 +49,7 @@ namespace WinFormsPagueDepois
                 txtNumero.Text = cliente.Numero;
                 txtComplemento.Text = cliente.Complemento;
                 txtCep.Text = cliente.Cep;
+                txtBairro.Text = cliente.Bairro;
                 txtUf.Text = cliente.Uf;
                 txtCidade.Text = cliente.Cidade;
                 txtDdd.Text = cliente.Ddd;
@@ -181,6 +182,11 @@ namespace WinFormsPagueDepois
                 errorProvider1.SetError(txtCep, "Informe o cep do cliente.");
                 return;
             }
+            if (txtBairro.Text == string.Empty)
+            {
+                errorProvider1.SetError(txtBairro, "Informe o bairro do cliente.");
+                return;
+            }
             if (txtUf.Text == string.Empty)
             {
                 errorProvider1.SetError(txtUf, "Informe a UF do cliente.");
@@ -212,6 +218,7 @@ namespace WinFormsPagueDepois
                 cliente.Numero = txtNumero.Text.Trim();
                 cliente.Complemento = txtComplemento.Text.Trim();
                 cliente.Cep = txtCep.Text.Trim();
+                cliente.Bairro = txtBairro.Text.Trim();
                 cliente.Uf = txtUf.Text.Trim();
                 cliente.Cidade = txtCidade.Text.Trim();
                 cliente.Ddd = txtDdd.Text.Trim();
@@ -273,6 +280,7 @@ namespace WinFormsPagueDepois
                     cliente.Numero = txtNumero.Text.Trim();
                     cliente.Complemento = txtComplemento.Text.Trim();
                     cliente.Cep = txtCep.Text.Trim();
+                    cliente.Bairro = txtBairro.Text.Trim();
                     cliente.Uf = txtUf.Text.Trim();
                     cliente.Cidade = txtCidade.Text.Trim();
                     cliente.Ddd = txtDdd.Text.Trim();
@@ -330,6 +338,11 @@ namespace WinFormsPagueDepois
                 .ToList();
             cbo.DisplayMember = "Description";
             cbo.ValueMember = "value";
+        }
+
+        private void txtUf_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            ValidaTexto.SomenteLetras(sender, e);
         }
     }
 }

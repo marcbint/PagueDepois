@@ -38,7 +38,7 @@ namespace WinFormsPagueDepois
                 Id      = s.Id,
                 Nome    = s.Nome,
                 Login   = s.Login,
-                Senha   = s.Senha,
+                //Senha   = s.Senha,
                 Status  = s.Status
             }
                                         ).OrderBy(x => x.Nome)
@@ -53,15 +53,15 @@ namespace WinFormsPagueDepois
             DataGridViewTextBoxColumn colId = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn colNome = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn colLogin = new DataGridViewTextBoxColumn();
-            DataGridViewTextBoxColumn colSenha = new DataGridViewTextBoxColumn();
+            //DataGridViewTextBoxColumn colSenha = new DataGridViewTextBoxColumn();
             DataGridViewTextBoxColumn colSituacao = new DataGridViewTextBoxColumn();
 
             //Nomeia os cabeçalhos
             dgvRegistros.Columns[0].HeaderText = "Id";
             dgvRegistros.Columns[1].HeaderText = "Nome";
             dgvRegistros.Columns[2].HeaderText = "Login";
-            dgvRegistros.Columns[3].HeaderText = "Senha";
-            dgvRegistros.Columns[4].HeaderText = "Situação";
+            //dgvRegistros.Columns[3].HeaderText = "Senha";
+            dgvRegistros.Columns[3].HeaderText = "Situação";
 
             //Cores
             dgvRegistros.GridColor = Color.Black;
@@ -96,18 +96,22 @@ namespace WinFormsPagueDepois
         {
 
             int index = e.RowIndex;
-            DataGridViewRow selectedRow = dgvRegistros.Rows[index];
 
-            string id = selectedRow.Cells[0].Value.ToString();
+            //Se não for cabeçalho
+            if (index != -1)
+            {
+                DataGridViewRow selectedRow = dgvRegistros.Rows[index];
 
-            //Abre a tela em processo de edição
-            frmRegistro frmRegistro = new frmRegistro();
-            frmRegistro.idRegistro  = Convert.ToInt32(id);
-            frmRegistro.ShowDialog();
+                string id = selectedRow.Cells[0].Value.ToString();
 
-            //Remonta o grid apos o process de edição ou exclusao.
-            criaDataGrid();
+                //Abre a tela em processo de edição
+                frmRegistro frmRegistro = new frmRegistro();
+                frmRegistro.idRegistro = Convert.ToInt32(id);
+                frmRegistro.ShowDialog();
 
+                //Remonta o grid apos o process de edição ou exclusao.
+                criaDataGrid();
+            }
 
 
         }

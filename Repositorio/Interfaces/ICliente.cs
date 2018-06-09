@@ -8,7 +8,7 @@ namespace Repositorio
 {
     public interface ICliente<T>
     {
-        void Inserir(T entidade);
+        void InserirOut(T entidade);
         void Alterar(T entidade);
         void Excluir(T entidade);
         T RetornarPorId(int Id);

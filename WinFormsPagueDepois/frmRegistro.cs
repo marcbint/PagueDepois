@@ -12,6 +12,7 @@ using Repositorio;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
 using Repositorio.Enum;
+using Repositorio.Helpers;
 
 namespace WinFormsPagueDepois
 {
@@ -115,20 +116,39 @@ namespace WinFormsPagueDepois
                 return;
             }
 
+            if (txtSenha.Text != txtConfirmarSenha.Text)
+            {
+                MessageBox.Show("As senhas digitadas não coincidem. Digite novamente!");
+                txtSenha.Clear();
+                txtConfirmarSenha.Clear();
+                txtSenha.Focus();
+                //errorProvider1.SetError(txtSenha, "Informe a senha do usuário");
+                return;
+            }
+
+
             UsuarioRepositorio<Usuario> usuarioRepo = new UsuarioRepositorio<Usuario>();
 
 
             try
             {
+                var keyNew = Helper.GeneratePassword(10);
+                var password = Helper.EncodePassword(txtSenha.Text, keyNew);
+
+
                 Usuario user = new Usuario();
                 user.Id = idRegistro;
                 user.Login = txtLogin.Text;
                 user.Nome = txtNome.Text;
-                user.Senha = txtSenha.Text;
+                //user.Senha = txtSenha.Text;
+                user.Senha = password;
+                user.Salt = keyNew;
                 //user.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
                 user.Status = situacao;
                 //usuarioRepo.Inserir(user);
 
+
+                
                 if (user.Id == 0)
                 {
 
@@ -230,6 +250,7 @@ namespace WinFormsPagueDepois
                 txtNome.Text = usuario.Nome;
                 txtLogin.Text = usuario.Login;
                 txtSenha.Text = usuario.Senha;
+                txtConfirmarSenha.Enabled = false;
                 //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(usuario.Status);
                 cboStatus.Text = usuario.Status.ToString();
 
@@ -258,6 +279,21 @@ namespace WinFormsPagueDepois
                 .ToList();
             cbo.DisplayMember = "Description";
             cbo.ValueMember = "value";
+        }
+
+        private void txtSenha_Validating(object sender, CancelEventArgs e)
+        {
+            if (txtSenha.Text.Count() <= 5)
+            {
+                //MessageBox.Show("A senha deve possuir pelo menos 6 caracteres/números!");
+                errorProvider1.SetError(txtSenha, "A senha deve possuir pelo menos 6 caracteres/números!");
+                e.Cancel = true;
+            }
+            else
+            {
+                errorProvider1.Clear();
+                e.Cancel = false;
+            }
         }
     }
 }

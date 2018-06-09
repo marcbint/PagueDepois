@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Repositorio;
 using Repositorio.Entidades;
+using Repositorio.Helpers;
 
 namespace WinFormsPagueDepois
 {
@@ -39,9 +40,24 @@ namespace WinFormsPagueDepois
             try
             {
                 usuarioRepo = new UsuarioRepositorio<Usuario>();
-                if ((usuarioRepo.ValidarAcesso(txtUsuario.Text, txtSenha.Text)))
+
+                //var hashCode = "s5X9HZQ1Cz"; // getUser.VCode;
+                //Password Hasing Process Call Helper Class Method
+                //var encodingPasswordString = Helper.EncodePassword(txtSenha.Text, hashCode);
+
+                //Consulta o usuário informado para localizar o código SALT
+                var usuario1 = usuarioRepo.ConsultaUsuario(txtUsuario.Text);
+                var hashCode =  usuario1[0].Salt; 
+
+                //Realiza do decript de acordo com a senha informada e codigo SALT do usuário localizado.
+                var encodingPasswordString = Helper.EncodePassword(txtSenha.Text, hashCode);
+
+                
+                //if ((usuarioRepo.ValidarAcesso(txtUsuario.Text, txtSenha.Text)))
+                if ((usuarioRepo.ValidarAcesso(txtUsuario.Text, encodingPasswordString)))
                 {
-                    var usuario = usuarioRepo.ConsultaPorAcesso(txtUsuario.Text, txtSenha.Text);
+                    
+                    var usuario = usuarioRepo.ConsultaPorAcesso(txtUsuario.Text, encodingPasswordString);
                                     
                     this.Hide();
 

@@ -19,6 +19,7 @@ namespace Repositorio.Entidades
         //public virtual int Id_Usuario_Pagamento { get; set; }
         //public virtual UsuarioPagamento UsuarioPagamento { get; set; }
         public virtual DateTime? Data_Pagamento { get; set; } // ? Pode ser nulo
+        public virtual DateTime? Data_Cancelamento { get; set; } // ? Pode ser nulo
         public virtual DateTime? Data_Registro_Pagamento { get; set; } // ? Pode ser nulo
         //public virtual string Status { get; set; }
         public virtual SituacaoPedido Status { get; set; }

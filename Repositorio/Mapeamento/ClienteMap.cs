@@ -23,6 +23,7 @@ namespace Repositorio.Mapeamento
             Map(c => c.Numero);
             Map(c => c.Complemento);
             Map(c => c.Cep);
+            Map(c => c.Bairro);
             Map(c => c.Uf);
             Map(c => c.Cidade);
             Map(c => c.Ddd);

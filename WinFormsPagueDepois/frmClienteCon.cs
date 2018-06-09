@@ -10,11 +10,14 @@ using System.Windows.Forms;
 
 using Repositorio;
 using Repositorio.Entidades;
+using Repositorio.Enum;
 
 namespace WinFormsPagueDepois
 {
     public partial class frmClienteCon : Form
     {
+        Situacao situacao;
+
         public frmClienteCon()
         {
             InitializeComponent();
@@ -39,14 +42,20 @@ namespace WinFormsPagueDepois
             ClienteRepositorio<Cliente> clienteRepo = new ClienteRepositorio<Cliente>();
             IList<Cliente> objeto = clienteRepo.Consultar2();
 
-            var lista = objeto.Select(s => new {
-                                                Id = s.Id
-                                                ,Tipo = s.Tipo
-                                                ,NomeRazao = s.NomeRazao
-                                                ,Cidade = s.Cidade
-                                                ,Contato = s.Contato
-                                                ,Status = s.Status                                                                                          
-                                                }                       
+            var lista = objeto.Select(s => new
+            {
+                Id = s.Id
+                                                ,
+                Tipo = s.Tipo
+                                                ,
+                NomeRazao = s.NomeRazao
+                                                ,
+                Cidade = s.Cidade
+                                                ,
+                Contato = s.Contato
+                                                ,
+                Status = s.Status
+            }
                                         )
                                                      .OrderBy(x => x.NomeRazao)
                                                      //.Sum(item => item.valor)
@@ -98,7 +107,7 @@ namespace WinFormsPagueDepois
             dgvClientes.CellBorderStyle = DataGridViewCellBorderStyle.Single;
             dgvClientes.RowHeadersVisible = false;
 
-            
+
             /*
             dgvClientes.Columns["Tipo"].Visible = false;
 
@@ -130,17 +139,22 @@ namespace WinFormsPagueDepois
         {
 
             int index = e.RowIndex;
-            DataGridViewRow selectedRow = dgvClientes.Rows[index];
 
-            string id = selectedRow.Cells[0].Value.ToString();
+            //Se for diferente do cabeçalho
+            if (index != -1)
+            {
+                DataGridViewRow selectedRow = dgvClientes.Rows[index];
 
-            //Abre a tela em processo de edição
-            frmCliente frmcliente = new frmCliente();
-            frmcliente.idCliente = Convert.ToInt32(id);
-            frmcliente.ShowDialog();
+                string id = selectedRow.Cells[0].Value.ToString();
 
-            //Remonta o grid apos o process de edição ou exclusao.
-            criaDataGrid();
+                //Abre a tela em processo de edição
+                frmCliente frmcliente = new frmCliente();
+                frmcliente.idCliente = Convert.ToInt32(id);
+                frmcliente.ShowDialog();
+
+                //Remonta o grid apos o process de edição ou exclusao.
+                criaDataGrid();
+            }
 
 
 
@@ -148,7 +162,100 @@ namespace WinFormsPagueDepois
 
         private void frmClienteCon_Load(object sender, EventArgs e)
         {
+            LoadSituacaoCombo<Situacao>(cboSituacao);
             criaDataGrid();
         }
+
+        private void Pesquisar()
+        {
+
+            ClienteRepositorio<Cliente> clienteRepo = new ClienteRepositorio<Cliente>();
+
+            Enum.TryParse<Situacao>(cboSituacao.SelectedValue.ToString(), out situacao);
+            int value = (int)situacao;
+
+            IList<Cliente> objeto = clienteRepo.Pesquisar(txtCliente.Text, situacao);
+
+            var lista = objeto.Select(s => new
+            {
+                Id = s.Id,
+                Tipo = s.Tipo,
+                NomeRazao = s.NomeRazao,
+                Cidade = s.Cidade,
+                Contato = s.Contato,
+                Status = s.Status
+            }
+                                     ).OrderBy(x => x.NomeRazao)
+                                      .ToList();
+
+
+            dgvClientes.DataSource = lista;
+
+            //Cria as colunas
+            //DataGridViewCheckBoxColumn colChk = new DataGridViewCheckBoxColumn(); Deve ser criado pela tela
+            DataGridViewTextBoxColumn colClienteId = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colClienteTipo = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colClienteNomeRazao = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colClienteCidade = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colClienteContato = new DataGridViewTextBoxColumn();
+            DataGridViewTextBoxColumn colClienteSituacao = new DataGridViewTextBoxColumn();
+
+
+            //Nomeia os cabeçalhos
+            dgvClientes.Columns[0].HeaderText = "Id";
+            dgvClientes.Columns[1].HeaderText = "Tipo";
+            dgvClientes.Columns[2].HeaderText = "Nome/Razão";
+            dgvClientes.Columns[3].HeaderText = "Cidade";
+            dgvClientes.Columns[4].HeaderText = "Contato";
+            dgvClientes.Columns[5].HeaderText = "Situação";
+
+            //Cores
+            dgvClientes.GridColor = Color.Black;
+            dgvClientes.ForeColor = Color.Black;
+
+
+            this.dgvClientes.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgvClientes.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvClientes.MultiSelect = false;
+            this.dgvClientes.Dock = DockStyle.Fill;
+
+            //Já Existentes
+            dgvClientes.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dgvClientes.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvClientes.ColumnHeadersDefaultCellStyle.Font = new Font(dgvClientes.Font, FontStyle.Bold);
+            dgvClientes.ForeColor = Color.Black;
+
+            dgvClientes.Name = "dgvClientes";
+            dgvClientes.Location = new Point(8, 8);
+            dgvClientes.Size = new Size(500, 250);
+            dgvClientes.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dgvClientes.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvClientes.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvClientes.RowHeadersVisible = false;
+
+        }
+
+        public static void LoadSituacaoCombo<T>(ComboBox cbo)
+        {
+            cbo.DataSource = Enum.GetValues(typeof(T))
+                .Cast<Enum>()
+                .Select(value => new
+                {
+                    (Attribute.GetCustomAttribute(value.GetType().GetField(value.ToString()), typeof(DescriptionAttribute)) as DescriptionAttribute).Description,
+                    value
+                })
+                .OrderBy(item => item.value)
+                .ToList();
+            cbo.DisplayMember = "Description";
+            cbo.ValueMember = "value";
+        }
+
+        private void btnPesquisar_Click(object sender, EventArgs e)
+        {
+            Pesquisar();
+        }
+
+
+
     }
 }

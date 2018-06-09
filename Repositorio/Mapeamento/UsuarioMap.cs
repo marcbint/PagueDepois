@@ -18,7 +18,7 @@ namespace Repositorio.Mapeamento
             Map(c => c.Nome);
             Map(c => c.Login);
             Map(c => c.Senha);
-            //Map(c => c.Status);
+            Map(c => c.Salt);
             Map(c => c.Status).CustomType<Situacao>();
             Table("usuarios");
         }

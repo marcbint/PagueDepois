@@ -29,21 +29,23 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPedidoCon));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
             this.btnSair = new System.Windows.Forms.Button();
             this.btnIncluir = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblDataCancelamento = new System.Windows.Forms.Label();
+            this.dtpDataCancelamento = new System.Windows.Forms.DateTimePicker();
             this.rdbAnoMes = new System.Windows.Forms.RadioButton();
             this.rdbDia = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtMes = new System.Windows.Forms.TextBox();
+            this.btnPesquisar = new System.Windows.Forms.Button();
             this.lblMes = new System.Windows.Forms.Label();
             this.txtAno = new System.Windows.Forms.TextBox();
             this.lblAno = new System.Windows.Forms.Label();
-            this.btnPesquisar = new System.Windows.Forms.Button();
             this.txtCliente = new System.Windows.Forms.TextBox();
             this.lblDataPagamento = new System.Windows.Forms.Label();
             this.dtpDataPagamento = new System.Windows.Forms.DateTimePicker();
@@ -53,6 +55,7 @@
             this.dtpPrevisaoPagamento = new System.Windows.Forms.DateTimePicker();
             this.lblCliente = new System.Windows.Forms.Label();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
+            this.btnExportar = new System.Windows.Forms.Button();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidos)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -77,8 +80,8 @@
             this.dgvPedidos.AllowUserToDeleteRows = false;
             this.dgvPedidos.AllowUserToResizeColumns = false;
             this.dgvPedidos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvPedidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPedidos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPedidos.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;
@@ -127,6 +130,8 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblDataCancelamento);
+            this.groupBox1.Controls.Add(this.dtpDataCancelamento);
             this.groupBox1.Controls.Add(this.rdbAnoMes);
             this.groupBox1.Controls.Add(this.rdbDia);
             this.groupBox1.Controls.Add(this.label1);
@@ -152,26 +157,47 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Filtros";
             // 
+            // lblDataCancelamento
+            // 
+            this.lblDataCancelamento.AutoSize = true;
+            this.lblDataCancelamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDataCancelamento.ForeColor = System.Drawing.Color.White;
+            this.lblDataCancelamento.Location = new System.Drawing.Point(9, 107);
+            this.lblDataCancelamento.Name = "lblDataCancelamento";
+            this.lblDataCancelamento.Size = new System.Drawing.Size(151, 20);
+            this.lblDataCancelamento.TabIndex = 56;
+            this.lblDataCancelamento.Text = "Data Cancelamento";
+            // 
+            // dtpDataCancelamento
+            // 
+            this.dtpDataCancelamento.Enabled = false;
+            this.dtpDataCancelamento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
+            this.dtpDataCancelamento.Location = new System.Drawing.Point(166, 107);
+            this.dtpDataCancelamento.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
+            this.dtpDataCancelamento.Name = "dtpDataCancelamento";
+            this.dtpDataCancelamento.Size = new System.Drawing.Size(103, 22);
+            this.dtpDataCancelamento.TabIndex = 55;
+            // 
             // rdbAnoMes
             // 
             this.rdbAnoMes.AutoSize = true;
-            this.rdbAnoMes.Checked = true;
-            this.rdbAnoMes.Location = new System.Drawing.Point(166, 82);
+            this.rdbAnoMes.Location = new System.Drawing.Point(286, 83);
             this.rdbAnoMes.Name = "rdbAnoMes";
             this.rdbAnoMes.Size = new System.Drawing.Size(80, 20);
             this.rdbAnoMes.TabIndex = 54;
-            this.rdbAnoMes.TabStop = true;
             this.rdbAnoMes.Text = "Ano/Mês";
             this.rdbAnoMes.UseVisualStyleBackColor = true;
-            this.rdbAnoMes.Click += new System.EventHandler(this.rdbAnoMes_Click);
+            this.rdbAnoMes.CheckedChanged += new System.EventHandler(this.rdbAnoMes_Click);
             // 
             // rdbDia
             // 
             this.rdbDia.AutoSize = true;
-            this.rdbDia.Location = new System.Drawing.Point(252, 83);
+            this.rdbDia.Checked = true;
+            this.rdbDia.Location = new System.Drawing.Point(166, 83);
             this.rdbDia.Name = "rdbDia";
             this.rdbDia.Size = new System.Drawing.Size(47, 20);
             this.rdbDia.TabIndex = 53;
+            this.rdbDia.TabStop = true;
             this.rdbDia.Text = "Dia";
             this.rdbDia.UseVisualStyleBackColor = true;
             this.rdbDia.CheckedChanged += new System.EventHandler(this.rdbDia_Click);
@@ -191,19 +217,35 @@
             // 
             this.txtMes.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMes.Location = new System.Drawing.Point(557, 80);
+            this.txtMes.Location = new System.Drawing.Point(281, 107);
             this.txtMes.MaxLength = 2;
             this.txtMes.Name = "txtMes";
             this.txtMes.Size = new System.Drawing.Size(34, 22);
             this.txtMes.TabIndex = 51;
             this.txtMes.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtMes_KeyPress);
             // 
+            // btnPesquisar
+            // 
+            this.btnPesquisar.BackColor = System.Drawing.Color.White;
+            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPesquisar.ForeColor = System.Drawing.Color.Black;
+            this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
+            this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnPesquisar.Location = new System.Drawing.Point(463, 87);
+            this.btnPesquisar.Name = "btnPesquisar";
+            this.btnPesquisar.Size = new System.Drawing.Size(128, 40);
+            this.btnPesquisar.TabIndex = 37;
+            this.btnPesquisar.Text = "         Pesquisar";
+            this.btnPesquisar.UseVisualStyleBackColor = false;
+            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
+            // 
             // lblMes
             // 
             this.lblMes.AutoSize = true;
             this.lblMes.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblMes.ForeColor = System.Drawing.Color.White;
-            this.lblMes.Location = new System.Drawing.Point(513, 83);
+            this.lblMes.Location = new System.Drawing.Point(237, 107);
             this.lblMes.Name = "lblMes";
             this.lblMes.Size = new System.Drawing.Size(39, 20);
             this.lblMes.TabIndex = 50;
@@ -213,7 +255,7 @@
             // 
             this.txtAno.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtAno.Location = new System.Drawing.Point(442, 80);
+            this.txtAno.Location = new System.Drawing.Point(166, 107);
             this.txtAno.MaxLength = 4;
             this.txtAno.Name = "txtAno";
             this.txtAno.Size = new System.Drawing.Size(59, 22);
@@ -225,27 +267,11 @@
             this.lblAno.AutoSize = true;
             this.lblAno.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblAno.ForeColor = System.Drawing.Color.White;
-            this.lblAno.Location = new System.Drawing.Point(398, 83);
+            this.lblAno.Location = new System.Drawing.Point(122, 107);
             this.lblAno.Name = "lblAno";
             this.lblAno.Size = new System.Drawing.Size(38, 20);
             this.lblAno.TabIndex = 48;
             this.lblAno.Text = "Ano";
-            // 
-            // btnPesquisar
-            // 
-            this.btnPesquisar.BackColor = System.Drawing.Color.White;
-            this.btnPesquisar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.btnPesquisar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnPesquisar.ForeColor = System.Drawing.Color.Black;
-            this.btnPesquisar.Image = ((System.Drawing.Image)(resources.GetObject("btnPesquisar.Image")));
-            this.btnPesquisar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.btnPesquisar.Location = new System.Drawing.Point(629, 87);
-            this.btnPesquisar.Name = "btnPesquisar";
-            this.btnPesquisar.Size = new System.Drawing.Size(128, 40);
-            this.btnPesquisar.TabIndex = 37;
-            this.btnPesquisar.Text = "         Pesquisar";
-            this.btnPesquisar.UseVisualStyleBackColor = false;
-            this.btnPesquisar.Click += new System.EventHandler(this.btnPesquisar_Click);
             // 
             // txtCliente
             // 
@@ -262,7 +288,7 @@
             this.lblDataPagamento.AutoSize = true;
             this.lblDataPagamento.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblDataPagamento.ForeColor = System.Drawing.Color.White;
-            this.lblDataPagamento.Location = new System.Drawing.Point(306, 107);
+            this.lblDataPagamento.Location = new System.Drawing.Point(30, 107);
             this.lblDataPagamento.Name = "lblDataPagamento";
             this.lblDataPagamento.Size = new System.Drawing.Size(130, 20);
             this.lblDataPagamento.TabIndex = 43;
@@ -272,7 +298,7 @@
             // 
             this.dtpDataPagamento.Enabled = false;
             this.dtpDataPagamento.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpDataPagamento.Location = new System.Drawing.Point(442, 107);
+            this.dtpDataPagamento.Location = new System.Drawing.Point(166, 107);
             this.dtpDataPagamento.MinDate = new System.DateTime(1900, 1, 1, 0, 0, 0, 0);
             this.dtpDataPagamento.Name = "dtpDataPagamento";
             this.dtpDataPagamento.Size = new System.Drawing.Size(103, 22);
@@ -339,12 +365,29 @@
             // 
             this.errorProvider1.ContainerControl = this;
             // 
+            // btnExportar
+            // 
+            this.btnExportar.BackColor = System.Drawing.Color.White;
+            this.btnExportar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnExportar.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExportar.ForeColor = System.Drawing.Color.Black;
+            this.btnExportar.Image = ((System.Drawing.Image)(resources.GetObject("btnExportar.Image")));
+            this.btnExportar.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.btnExportar.Location = new System.Drawing.Point(118, 509);
+            this.btnExportar.Name = "btnExportar";
+            this.btnExportar.Size = new System.Drawing.Size(115, 40);
+            this.btnExportar.TabIndex = 57;
+            this.btnExportar.Text = "         Exportar";
+            this.btnExportar.UseVisualStyleBackColor = false;
+            this.btnExportar.Click += new System.EventHandler(this.btnExportar_Click);
+            // 
             // frmPedidoCon
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.DodgerBlue;
             this.ClientSize = new System.Drawing.Size(784, 561);
+            this.Controls.Add(this.btnExportar);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.groupBox2);
             this.Controls.Add(this.btnSair);
@@ -387,5 +430,8 @@
         private System.Windows.Forms.TextBox txtAno;
         private System.Windows.Forms.Label lblAno;
         private System.Windows.Forms.ErrorProvider errorProvider1;
+        private System.Windows.Forms.Label lblDataCancelamento;
+        private System.Windows.Forms.DateTimePicker dtpDataCancelamento;
+        private System.Windows.Forms.Button btnExportar;
     }
 }

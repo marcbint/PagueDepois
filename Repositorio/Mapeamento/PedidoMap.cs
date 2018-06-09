@@ -26,6 +26,7 @@ namespace Repositorio.Mapeamento
             Map(c => c.Status).CustomType<SituacaoPedido>();
             Map(c => c.Valor_Total);
             Map(c => c.Motivo_Cancelamento);
+            Map(c => c.Data_Cancelamento);
             //Map(c => c.Id_Cliente);
             //Map(c => c.Id_Forma_Pagamento);
             References(c => c.Cliente).Column("id_cliente").Not.LazyLoad(); //atributo tabela pedido

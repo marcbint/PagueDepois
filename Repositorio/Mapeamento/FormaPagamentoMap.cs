@@ -17,7 +17,8 @@ namespace Repositorio.Mapeamento
         {
             Id(c => c.Id);
             Map(c => c.Descricao);
-            Map(c => c.Tipo);
+            //Map(c => c.Tipo);
+            Map(c => c.Tipo).CustomType<TipoPagamento>();
             //Map(c => c.Status);
             Map(c => c.Status).CustomType<Situacao>();
             Table("formas_pagamento");   

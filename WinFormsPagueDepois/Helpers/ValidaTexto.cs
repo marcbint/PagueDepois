@@ -112,7 +112,25 @@ namespace WinFormsPagueDepois.Helpers
         }
 
 
-    
+        public static void SomenteLetras(object sender, KeyPressEventArgs e)
+        {
+            /*
+            //Se a tecla digitada não for número e nem backspace
+            if ((e.KeyChar) >= 48 && (e.KeyChar) <= 57)
+            {
+                //Atribui True no Handled para cancelar o evento
+                e.Handled = true;
+            }*/
+
+            if (!char.IsLetter(e.KeyChar) && !(e.KeyChar == (char)Keys.Back) )
+            {
+                e.Handled = true;
+                
+            }
+
+
+        }
+
         public static void Moeda(ref TextBox txt)
         {
             string n = string.Empty;

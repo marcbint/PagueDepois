@@ -32,6 +32,8 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmRegistro));
             this.btnSair = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.lblConfirmarSenha = new System.Windows.Forms.Label();
+            this.txtConfirmarSenha = new System.Windows.Forms.TextBox();
             this.cboStatus = new System.Windows.Forms.ComboBox();
             this.Label4 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -57,13 +59,15 @@
             this.btnSair.Location = new System.Drawing.Point(444, 284);
             this.btnSair.Name = "btnSair";
             this.btnSair.Size = new System.Drawing.Size(100, 40);
-            this.btnSair.TabIndex = 17;
+            this.btnSair.TabIndex = 8;
             this.btnSair.Text = "    Sair";
             this.btnSair.UseVisualStyleBackColor = false;
             this.btnSair.Click += new System.EventHandler(this.btnSair_Click);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.lblConfirmarSenha);
+            this.groupBox1.Controls.Add(this.txtConfirmarSenha);
             this.groupBox1.Controls.Add(this.cboStatus);
             this.groupBox1.Controls.Add(this.Label4);
             this.groupBox1.Controls.Add(this.label2);
@@ -81,23 +85,43 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Registrar Usuário";
             // 
+            // lblConfirmarSenha
+            // 
+            this.lblConfirmarSenha.AutoSize = true;
+            this.lblConfirmarSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblConfirmarSenha.ForeColor = System.Drawing.Color.White;
+            this.lblConfirmarSenha.Location = new System.Drawing.Point(6, 147);
+            this.lblConfirmarSenha.Name = "lblConfirmarSenha";
+            this.lblConfirmarSenha.Size = new System.Drawing.Size(129, 20);
+            this.lblConfirmarSenha.TabIndex = 6;
+            this.lblConfirmarSenha.Text = "Confirmar Senha";
+            // 
+            // txtConfirmarSenha
+            // 
+            this.txtConfirmarSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtConfirmarSenha.Location = new System.Drawing.Point(136, 144);
+            this.txtConfirmarSenha.Name = "txtConfirmarSenha";
+            this.txtConfirmarSenha.PasswordChar = '*';
+            this.txtConfirmarSenha.Size = new System.Drawing.Size(228, 26);
+            this.txtConfirmarSenha.TabIndex = 4;
+            // 
             // cboStatus
             // 
             this.cboStatus.FormattingEnabled = true;
             this.cboStatus.Items.AddRange(new object[] {
             "ATIVO",
             "INATIVO"});
-            this.cboStatus.Location = new System.Drawing.Point(121, 186);
+            this.cboStatus.Location = new System.Drawing.Point(136, 176);
             this.cboStatus.Name = "cboStatus";
             this.cboStatus.Size = new System.Drawing.Size(146, 26);
-            this.cboStatus.TabIndex = 4;
+            this.cboStatus.TabIndex = 5;
             // 
             // Label4
             // 
             this.Label4.AutoSize = true;
             this.Label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label4.ForeColor = System.Drawing.Color.White;
-            this.Label4.Location = new System.Drawing.Point(55, 189);
+            this.Label4.Location = new System.Drawing.Point(79, 178);
             this.Label4.Name = "Label4";
             this.Label4.Size = new System.Drawing.Size(56, 20);
             this.Label4.TabIndex = 3;
@@ -108,7 +132,7 @@
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label2.ForeColor = System.Drawing.Color.White;
-            this.label2.Location = new System.Drawing.Point(55, 143);
+            this.label2.Location = new System.Drawing.Point(79, 115);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(56, 20);
             this.label2.TabIndex = 3;
@@ -119,7 +143,7 @@
             this.Label3.AutoSize = true;
             this.Label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Label3.ForeColor = System.Drawing.Color.White;
-            this.Label3.Location = new System.Drawing.Point(55, 51);
+            this.Label3.Location = new System.Drawing.Point(84, 51);
             this.Label3.Name = "Label3";
             this.Label3.Size = new System.Drawing.Size(51, 20);
             this.Label3.TabIndex = 2;
@@ -130,7 +154,7 @@
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.White;
-            this.label1.Location = new System.Drawing.Point(55, 97);
+            this.label1.Location = new System.Drawing.Point(87, 83);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(48, 20);
             this.label1.TabIndex = 2;
@@ -139,29 +163,30 @@
             // txtSenha
             // 
             this.txtSenha.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtSenha.Location = new System.Drawing.Point(121, 140);
+            this.txtSenha.Location = new System.Drawing.Point(136, 112);
             this.txtSenha.Name = "txtSenha";
             this.txtSenha.PasswordChar = '*';
             this.txtSenha.Size = new System.Drawing.Size(228, 26);
-            this.txtSenha.TabIndex = 1;
+            this.txtSenha.TabIndex = 3;
+            this.txtSenha.Validating += new System.ComponentModel.CancelEventHandler(this.txtSenha_Validating);
             // 
             // txtNome
             // 
             this.txtNome.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtNome.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtNome.Location = new System.Drawing.Point(121, 48);
+            this.txtNome.Location = new System.Drawing.Point(136, 48);
             this.txtNome.Name = "txtNome";
             this.txtNome.Size = new System.Drawing.Size(375, 26);
-            this.txtNome.TabIndex = 0;
+            this.txtNome.TabIndex = 1;
             // 
             // txtLogin
             // 
             this.txtLogin.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtLogin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtLogin.Location = new System.Drawing.Point(121, 94);
+            this.txtLogin.Location = new System.Drawing.Point(136, 80);
             this.txtLogin.Name = "txtLogin";
             this.txtLogin.Size = new System.Drawing.Size(228, 26);
-            this.txtLogin.TabIndex = 0;
+            this.txtLogin.TabIndex = 2;
             // 
             // errorProvider1
             // 
@@ -177,7 +202,7 @@
             this.btnExcluir.Location = new System.Drawing.Point(141, 284);
             this.btnExcluir.Name = "btnExcluir";
             this.btnExcluir.Size = new System.Drawing.Size(109, 40);
-            this.btnExcluir.TabIndex = 26;
+            this.btnExcluir.TabIndex = 7;
             this.btnExcluir.Text = "         Excluir";
             this.btnExcluir.UseVisualStyleBackColor = false;
             this.btnExcluir.Click += new System.EventHandler(this.btnExcluir_Click);
@@ -192,7 +217,7 @@
             this.btnSalvar.Location = new System.Drawing.Point(20, 284);
             this.btnSalvar.Name = "btnSalvar";
             this.btnSalvar.Size = new System.Drawing.Size(100, 40);
-            this.btnSalvar.TabIndex = 25;
+            this.btnSalvar.TabIndex = 6;
             this.btnSalvar.Text = "         Salvar";
             this.btnSalvar.UseVisualStyleBackColor = false;
             this.btnSalvar.Click += new System.EventHandler(this.btnSalvar_Click);
@@ -233,5 +258,7 @@
         private System.Windows.Forms.ErrorProvider errorProvider1;
         private System.Windows.Forms.Button btnExcluir;
         private System.Windows.Forms.Button btnSalvar;
+        private System.Windows.Forms.Label lblConfirmarSenha;
+        private System.Windows.Forms.TextBox txtConfirmarSenha;
     }
 }

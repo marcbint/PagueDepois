@@ -43,6 +43,21 @@ namespace Repositorio
             }
         }
 
+
+        public IList<Usuario> ConsultaUsuario(string login)
+        {
+            using (ISession session = SessionFactory.AbrirSession())
+            {
+
+
+                var usuarios = session.Query<Usuario>()
+                                         .Where(p => p.Login == login)
+                                         .ToList();
+
+                return usuarios;
+            }
+        }
+
         public void Inserir(T entidade)
         {
             using (ISession session = SessionFactory.AbrirSession())

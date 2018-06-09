@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 using Repositorio.Entidades;
-
-
+using Repositorio.Enum;
 
 namespace Repositorio
 {
@@ -96,6 +95,24 @@ namespace Repositorio
             using (ISession session = SessionFactory.AbrirSession())
             {
                 return (from c in session.Query<T>() select c).ToList();
+            }
+        }
+
+        public IList<Produto> Pesquisar(string paramProduto, Situacao situacao)
+        {
+            using (ISession session = SessionFactory.AbrirSession())
+            {
+
+                IList<Produto> objetoRetorno = new List<Produto>();
+
+                var objetoProduto = (from produto in session.Query<Produto>()
+                                     where produto.Descricao.Contains(paramProduto)
+                                     && Convert.ToInt32(produto.Status) == Convert.ToInt32(situacao)
+                                     select produto).ToList();
+                objetoRetorno = objetoProduto;
+
+
+                return objetoRetorno;
             }
         }
     }

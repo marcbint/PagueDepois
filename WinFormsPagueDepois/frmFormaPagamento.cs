@@ -18,7 +18,7 @@ namespace WinFormsPagueDepois
     public partial class frmFormaPagamento : Form
     {
         Situacao situacao;
-
+        TipoPagamento tipoPagamento;
 
         public int idFormaPagamento;
 
@@ -30,6 +30,7 @@ namespace WinFormsPagueDepois
         private void frmFormaPagamento_Load(object sender, EventArgs e)
         {
             LoadSituacaoCombo<Situacao>(cboStatus);
+            LoadSituacaoCombo<TipoPagamento>(cboTipo);
 
             if (idFormaPagamento >= 1)
             {
@@ -37,7 +38,8 @@ namespace WinFormsPagueDepois
                 FormaPagamentoRepositorio<FormaPagamento> formaPagamentoRepo = new FormaPagamentoRepositorio<FormaPagamento>();
                 var formaPagamento = formaPagamentoRepo.RetornarPorId(idFormaPagamento);
                 txtDescricao.Text = formaPagamento.Descricao;
-                cboTipo.Text = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoConsulta(formaPagamento.Tipo);
+                //cboTipo.Text = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoConsulta(formaPagamento.Tipo);
+                cboTipo.Text = formaPagamento.Tipo.ToString();
                 //cboStatus.Text = RetornaStatusConsulta.retornaStatusConsulta(formaPagamento.Status);
                 cboStatus.Text = formaPagamento.Status.ToString();
 
@@ -53,6 +55,9 @@ namespace WinFormsPagueDepois
         {
             Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
             int valueSituacao = (int)situacao;
+
+            Enum.TryParse<TipoPagamento>(cboTipo.SelectedValue.ToString(), out tipoPagamento);
+            int valueTipoPagamento = (int)tipoPagamento;
 
             errorProvider1.Clear();
             if (txtDescricao.Text == string.Empty)
@@ -79,7 +84,8 @@ namespace WinFormsPagueDepois
 
                 formaPagamento.Id = idFormaPagamento;
                 formaPagamento.Descricao = txtDescricao.Text;
-                formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
+                //formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
+                formaPagamento.Tipo = tipoPagamento;
                 //formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
                 formaPagamento.Status = situacao;
 
@@ -116,6 +122,10 @@ namespace WinFormsPagueDepois
                 Enum.TryParse<Situacao>(cboStatus.SelectedValue.ToString(), out situacao);
                 int valueSituacao = (int)situacao;
 
+                Enum.TryParse<TipoPagamento>(cboStatus.SelectedValue.ToString(), out tipoPagamento);
+                int valueTipoPagamento = (int)tipoPagamento;
+
+
                 FormaPagamentoRepositorio<FormaPagamento> formaPagamentoRepo = new FormaPagamentoRepositorio<FormaPagamento>();
 
                 try
@@ -124,7 +134,10 @@ namespace WinFormsPagueDepois
 
                     formaPagamento.Id = idFormaPagamento;
                     formaPagamento.Descricao = txtDescricao.Text;
-                    formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
+                    
+                    //formaPagamento.Tipo = RetornaTipoFormaPagamento.retornaTipoFormaPagamentoInclusao(cboTipo.Text);
+                    formaPagamento.Tipo = tipoPagamento;
+                    
                     //formaPagamento.Status = RetornaStatusConsulta.retornaStatusInclusao(cboStatus.Text);
                     formaPagamento.Status = situacao;
 

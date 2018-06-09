@@ -60,7 +60,9 @@
   <ItemGroup>
     <Compile Include="Entidades\UsuarioPagamento.cs" />
     <Compile Include="Enum\Situacao.cs" />
+    <Compile Include="Enum\TipoPagamento.cs" />
     <Compile Include="Enum\TipoPessoa.cs" />
+    <Compile Include="Helpers\Helper.cs" />
     <Compile Include="Mapeamento\UsuarioPagamentoMap.cs" />
     <Compile Include="Repositorio\ClienteRepositorio.cs" />
     <Compile Include="Entidades\Cliente.cs" />

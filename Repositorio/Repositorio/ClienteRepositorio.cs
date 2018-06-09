@@ -7,12 +7,15 @@ using System.Threading.Tasks;
 using NHibernate;
 using NHibernate.Linq;
 using Repositorio.Entidades;
+using Repositorio.Enum;
 
 namespace Repositorio
 {
     public class ClienteRepositorio<T> : ICliente<T> where T : class
     {
-        public void Inserir(T entidade)
+
+
+        public void InserirOut(T entidade)
         {
             using (ISession session = SessionFactory.AbrirSession())
             {
@@ -22,6 +25,33 @@ namespace Repositorio
                     {
                         session.Save(entidade);
                         transacao.Commit();
+                        
+                    }
+                    catch (Exception ex)
+                    {
+                        if (!transacao.WasCommitted)
+                        {
+                            transacao.Rollback();
+                        }
+                        throw new Exception("Erro ao inserir Cliente : " + ex.Message);
+                    }
+                }
+            }
+        }
+        
+
+        public int Inserir(Cliente entidade)
+        {
+            using (ISession session = SessionFactory.AbrirSession())
+            {
+                using (ITransaction transacao = session.BeginTransaction())
+                {
+                    try
+                    {
+                        session.Save(entidade);
+                        transacao.Commit();
+                        int id = entidade.Id;
+                        return id;
                     }
                     catch (Exception ex)
                     {
@@ -110,6 +140,25 @@ namespace Repositorio
 
 
                 return objeto;
+            }
+        }
+
+
+        public IList<Cliente> Pesquisar(string nomeRazao, Situacao situacao)
+        {
+            using (ISession session = SessionFactory.AbrirSession())
+            {
+                                
+                IList<Cliente> objetoRetorno = new List<Cliente>();
+
+                var objetoCliente = (from cliente in session.Query<Cliente>()
+                                            where cliente.NomeRazao.Contains(nomeRazao)
+                                            && Convert.ToInt32(cliente.Status) == Convert.ToInt32(situacao)
+                                            select cliente).ToList();
+                objetoRetorno = objetoCliente;
+
+
+                return objetoRetorno;
             }
         }
     }

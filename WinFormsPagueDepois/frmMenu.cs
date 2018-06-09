@@ -49,6 +49,12 @@ namespace WinFormsPagueDepois
 
         private void btnPedido_Click(object sender, EventArgs e)
         {
+            frmPedido frmPedido = new frmPedido();
+            frmPedido.ShowDialog();
+        }
+
+        private void btnRelatorioPedidos_Click(object sender, EventArgs e)
+        {
             frmPedidoCon frmPedidoCon = new frmPedidoCon();
             frmPedidoCon.ShowDialog();
         }

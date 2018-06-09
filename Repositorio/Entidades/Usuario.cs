@@ -13,6 +13,7 @@ namespace Repositorio.Entidades
         public virtual string Nome { get; set; }
         public virtual string Login { get; set; }
         public virtual string Senha { get; set; }
+        public virtual string Salt { get; set; }
         //public virtual char Status { get; set; }
         public virtual Situacao Status { get; set; }
         //public virtual IList<Pedido> Pedido { get; set; }

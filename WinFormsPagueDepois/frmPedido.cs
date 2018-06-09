@@ -12,11 +12,13 @@ using Repositorio;
 using Repositorio.Enum;
 using Repositorio.Entidades;
 using WinFormsPagueDepois.Helpers;
+using System.Globalization;
 
 namespace WinFormsPagueDepois
 {
     public partial class frmPedido : Form
     {
+        public int clienteInserido;
         public int linha;
         public int atualiza;
         public int codigoReg;
@@ -46,8 +48,15 @@ namespace WinFormsPagueDepois
         
         private void frmPedido_Load(object sender, EventArgs e)
         {
-            
-            carregaClientes();
+            if (clienteInserido > 0)
+            {
+                carregaClientesPorId(clienteInserido);
+                ConsultaDadosCliente(clienteInserido);
+            }
+            else
+            {
+                carregaClientes();
+            }
             carregaFormasPagamento();
             LoadSituacaoCombo<SituacaoPedido>(cboSituacao);
             carregaProdutos();
@@ -55,6 +64,7 @@ namespace WinFormsPagueDepois
 
             if (idPedido >= 1)
             {
+                //this.groupBox1.ForeColor = System.Drawing.Color.White;
 
                 PedidoRepositorio<Pedido> pedidoRepo = new PedidoRepositorio<Pedido>();
                 var pedido = pedidoRepo.RetornarPorId(idPedido);
@@ -63,7 +73,7 @@ namespace WinFormsPagueDepois
                 carregaClientesPorId(pedido.Cliente.Id);
                 carregaFormasPagamentoPorId(pedido.FormaPagamento.Id);
                 dtpPrevisaoPagamento.Text = pedido.Data_Previsao_Pagamento.ToString();
-                txtValorPedido.Text = pedido.Valor_Total.ToString();
+                txtValorPedido.Text = pedido.Valor_Total.ToString("N2");
                 cboSituacao.Text = pedido.Status.ToString();
                 txtMotivo.Text = pedido.Motivo_Cancelamento;
 
@@ -86,8 +96,31 @@ namespace WinFormsPagueDepois
                 dgvPedidoItem.ForeColor = Color.Black;
 
 
+                //Já Existentes
+                /*
+                dgvPedidoItem.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
+                dgvPedidoItem.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+                dgvPedidoItem.ColumnHeadersDefaultCellStyle.Font = new Font(dgvPedidoItem.Font, FontStyle.Bold);
+                dgvPedidoItem.ForeColor = Color.Black;
+                */
+
+                //Propriedades
+                dgvPedidoItem.Name = "dgvPedidoItem";
+                //dgvPedidoItem.Location = new Point(8, 8);
+                //dgvPedidoItem.Size = new Size(500, 250);
+                dgvPedidoItem.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+                dgvPedidoItem.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+                dgvPedidoItem.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+                dgvPedidoItem.RowHeadersVisible = false;
+
+
                 this.dgvPedidoItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
                 this.dgvPedidoItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+                this.dgvPedidoItem.MultiSelect = false;
+
+
+                //this.dgvPedidoItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+                //this.dgvPedidoItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
 
 
                 IList<PedidoItem> objetoPedido = pedido.PedidoItem;
@@ -95,8 +128,8 @@ namespace WinFormsPagueDepois
                     Id = s.Id
                     ,Descriçao = s.Produto.Descricao
                     ,Quantidade = s.Quantidade
-                    ,ValorUnitario = s.Valor_Unitario
-                    ,ValorTotal = s.Valor_Total
+                    ,ValorUnitario = s.Valor_Unitario.ToString("N2")
+                    ,ValorTotal = s.Valor_Total.ToString("N2")
                                                                                                                
                 }).OrderBy(x => x.Descriçao)
                     //.Sum(item => item.valor)
@@ -107,8 +140,8 @@ namespace WinFormsPagueDepois
                 groupBox2.Enabled = false;
                 //dgvPedidoItem.Enabled = false;
 
-                
-                if(cboSituacao.SelectedValue.ToString() == "CANCELADO")
+
+                if (cboSituacao.SelectedValue.ToString() == "CANCELADO")
                 {
                     btnSalvar.Visible = false;
                     groupBox1.Enabled = false;
@@ -129,6 +162,8 @@ namespace WinFormsPagueDepois
             //maskDocumento.Focus();
 
         }
+
+        
 
         private void criaDataGrid()
         {
@@ -192,16 +227,41 @@ namespace WinFormsPagueDepois
             dgvPedidoItem.Columns[4].HeaderText = "Valor Unitário";
             dgvPedidoItem.Columns[5].HeaderText = "Valor Total";
 
+
+            //Formata exibição do dado na coluna
+            dgvPedidoItem.Columns[4].DefaultCellStyle.Format = "N2";
+            dgvPedidoItem.Columns[5].DefaultCellStyle.Format = "N2";
+
             //Cores
             dgvPedidoItem.GridColor = Color.Black;
             dgvPedidoItem.ForeColor = Color.Black;
 
+            //Já Existentes
+            dgvPedidoItem.ColumnHeadersDefaultCellStyle.BackColor = Color.LightSkyBlue;
+            dgvPedidoItem.ColumnHeadersDefaultCellStyle.ForeColor = Color.White;
+            dgvPedidoItem.ColumnHeadersDefaultCellStyle.Font = new Font(dgvPedidoItem.Font, FontStyle.Bold);
+            dgvPedidoItem.ForeColor = Color.Black;
+            
+
+            //Propriedades
+            dgvPedidoItem.Name = "dgvPedidos";
+            //dgvPedidoItem.Location = new Point(8, 8);
+            //dgvPedidoItem.Size = new Size(500, 250);
+            dgvPedidoItem.AutoSizeRowsMode = DataGridViewAutoSizeRowsMode.DisplayedCellsExceptHeaders;
+            dgvPedidoItem.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.Single;
+            dgvPedidoItem.CellBorderStyle = DataGridViewCellBorderStyle.Single;
+            dgvPedidoItem.RowHeadersVisible = false;
+            
+
             this.dgvPedidoItem.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.dgvPedidoItem.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.dgvPedidoItem.MultiSelect = false;
+            //this.dgvPedidoItem.Dock = DockStyle.Fill;
 
 
 
         }
+
 
         private void carregaProdutos()
         {
@@ -215,6 +275,7 @@ namespace WinFormsPagueDepois
 
         }
 
+
         private void carregaClientes()
         {
             ClienteRepositorio<Cliente> clienteRepo = new ClienteRepositorio<Cliente>();
@@ -225,6 +286,7 @@ namespace WinFormsPagueDepois
             //this.cboCliente.SelectedItem = null;
         }
 
+
         private void carregaClientesPorId(int id)
         {
             ClienteRepositorio<Cliente> clienteRepo = new ClienteRepositorio<Cliente>();      
@@ -233,37 +295,32 @@ namespace WinFormsPagueDepois
             cboCliente.SelectedValue = cliente.Id;
         }
 
-        private void populaCboSituacao()
-        {
-            //cboSituacao.DataSource = Enum.GetValues(typeof(SituacaoPedido));
-            
-
-            //cboSituacao.DataSource = typeof(SituacaoPedido).ToList<int>(); 
-            //cboSituacao.DisplayMember = "Value";
-            //cboSituacao.ValueMember = "Key";
-
-            /*
-            cboSituacao.DataSource = typeof(SituacaoPedido).ToList<int>();
-            cboSituacao.DisplayMember = "Value";
-            cboSituacao.ValueMember = "Key"; */
-
-        }
 
         private void carregaFormasPagamento()
         {
-            FormaPagamentoRepositorio<FormaPagamento> formaPagamentoRepo = new FormaPagamentoRepositorio<FormaPagamento>();
-            cboFormaPagamento.DataSource = formaPagamentoRepo.Consultar();
+            FormaPagamentoRepositorio<FormaPagamento> formaPagamento = new FormaPagamentoRepositorio<FormaPagamento>();
+            IList<FormaPagamento> objetoFormaPagamento = formaPagamento.Consultar();
+
+            var lista = objetoFormaPagamento.Select(s => new {
+                Id = s.Id,
+                Descricao = s.Tipo + " - " + s.Descricao
+                                                                                                           
+            })
+                                                     .OrderBy(x => x.Descricao)
+                                                     .ToList();
+
+            cboFormaPagamento.DataSource = lista;
             this.cboFormaPagamento.DisplayMember = "Descricao";
             this.cboFormaPagamento.ValueMember = "Id";
 
-            //this.cboFormaPagamento.SelectedItem = null;
         }
+
 
         private void carregaFormasPagamentoPorId(int id)
         {
             FormaPagamentoRepositorio<FormaPagamento> formaPagamentoRepo = new FormaPagamentoRepositorio<FormaPagamento>();
             var formaPagamento = formaPagamentoRepo.RetornarPorId(id);
-            this.cboFormaPagamento.Text = formaPagamento.Descricao;
+            this.cboFormaPagamento.Text = formaPagamento.Tipo.ToString() + " - " + formaPagamento.Descricao;
             this.cboFormaPagamento.SelectedValue = formaPagamento.Id;
 
         }
@@ -271,8 +328,9 @@ namespace WinFormsPagueDepois
 
         private void RecalculaValorPedido()
         {
-            txtValorPedido.Text = CalculaValorTotalPedido().ToString();
+            txtValorPedido.Text = CalculaValorTotalPedido().ToString("N2");
         }
+
 
         private void txtQuantidade_TextChanged(object sender, EventArgs e)
         {
@@ -282,10 +340,12 @@ namespace WinFormsPagueDepois
             }
         }
 
+
         private void txtQuantidade_KeyPress(object sender, KeyPressEventArgs e)
         {
             Helpers.ValidaTexto.SomenteNumeros(sender, e);
         }
+
 
         private decimal CalculaValorTotalPedido()
         {
@@ -296,8 +356,10 @@ namespace WinFormsPagueDepois
                 total = total + Convert.ToDecimal(dgvPedidoItem.Rows[i].Cells["clnProdutoValorTotal"].Value);
             }
             return total;
+            
 
         }
+
 
         private void calculaValorTotal(string quantidade)
         {
@@ -305,10 +367,12 @@ namespace WinFormsPagueDepois
 
             produtoQuantidade = quantidade;
             produtoValorTotal = Convert.ToInt32(produtoQuantidade) * Convert.ToDecimal(produtoValor);
-            txtValorTotal.Text = Convert.ToString(produtoValorTotal);
+            //txtValorTotal.Text = Convert.ToString(produtoValorTotal);
+            txtValorTotal.Text = produtoValorTotal.ToString("N2");
 
             btnIncluirPedidoItem.Enabled = true;
         }
+
 
         private void limpaVariaveisCampos()
         {
@@ -325,6 +389,7 @@ namespace WinFormsPagueDepois
             btnIncluirPedidoItem.Enabled = false;
         }
 
+
         private void limpaCampos()
         {
             txtQuantidade.Text = string.Empty;
@@ -332,6 +397,7 @@ namespace WinFormsPagueDepois
             txtQuantidade.Enabled = true;
             btnIncluirPedidoItem.Enabled = false;
         }
+
 
         private void consultaProdutoSelecionado(int id)
         {
@@ -345,10 +411,12 @@ namespace WinFormsPagueDepois
             produtoId = this.cboProduto.SelectedValue.ToString();
             produtoCodigo = produto.Codigo;
             produtoDescricao = produto.Descricao;
-            produtoValor = Convert.ToString(produto.Valor);
+            //produtoValor = Convert.ToString(produto.Valor);
+            produtoValor = produto.Valor.ToString("N2");
 
             txtQuantidade.Enabled = true;
         }
+
 
         private static Cliente consultaClienteSelecionado(int id)
         {
@@ -360,6 +428,7 @@ namespace WinFormsPagueDepois
             return cliente;
         }
 
+
         private static FormaPagamento consultaFormaPagamentoSelecionada(int id)
         {
 
@@ -368,6 +437,7 @@ namespace WinFormsPagueDepois
 
             return formaPagamento;
         }
+
 
         private void btnSalvar_Click(object sender, EventArgs e)
         {
@@ -429,7 +499,14 @@ namespace WinFormsPagueDepois
 
                 //Recupera as informações do cliente selecionado no combo Clientes.
                 //Atualiza a classe cliente instanciada na classe pedido
-                pedido.Cliente = consultaClienteSelecionado(Convert.ToInt32(this.cboCliente.SelectedValue.ToString()));
+                if (clienteInserido > 0)
+                {
+                    pedido.Cliente = consultaClienteSelecionado(clienteInserido);
+                }
+                else
+                {
+                    pedido.Cliente = consultaClienteSelecionado(Convert.ToInt32(this.cboCliente.SelectedValue.ToString()));
+                }
 
                 //Recupera as informações do cliente selecionado no combo Clientes.
                 //Atualiza a classe cliente instanciada na classe pedido
@@ -464,6 +541,7 @@ namespace WinFormsPagueDepois
                 {
                     pedido.Status = situacaoPedido;
                     pedido.Motivo_Cancelamento = txtMotivo.Text.Trim();
+                    pedido.Data_Cancelamento = Convert.ToDateTime(DateTime.Now);
                 }
                 
 
@@ -491,6 +569,7 @@ namespace WinFormsPagueDepois
 
                     pedidoRepo.InserirPedidoItem(pedido, pedidoItem);
                     MessageBox.Show("Cadastro realizado com sucesso!", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    clienteInserido = 0;
                     this.Close();
                 }
                 else
@@ -512,6 +591,7 @@ namespace WinFormsPagueDepois
 
                     pedidoRepo.Alterar(pedidoUpdate);
                     MessageBox.Show("Alteração realizada com sucesso", "Sucesso", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    clienteInserido = 0;
                     this.Close();
                 }
 
@@ -660,6 +740,42 @@ namespace WinFormsPagueDepois
             }
         }
 
-        
+        private void btnIncluirCliente_Click(object sender, EventArgs e)
+        {
+            
+            frmClienteIncluir cliente = new frmClienteIncluir();
+            cliente.ShowDialog();
+            this.Close();
+        }
+
+        private void cboCliente_SelectedValueChanged(object sender, EventArgs e)
+        {
+            //if (cboCliente.SelectedValue.ToString() != "Repositorio.Entidades.Cliente" && cboCliente.SelectedIndex != -1)
+            if (cboCliente.SelectedIndex != -1 && cboCliente != null && cboCliente.SelectedValue.ToString() != "Repositorio.Entidades.Cliente")
+            {
+                string idCliente = this.cboCliente.SelectedValue.ToString();
+
+                if (idCliente != string.Empty)
+                {
+                    ConsultaDadosCliente(Convert.ToInt32(idCliente));
+
+                    //var cliente = consultaClienteSelecionado(Convert.ToInt32(this.cboCliente.SelectedValue.ToString()));
+                    //var cliente = consultaClienteSelecionado(Convert.ToInt32( idCliente));
+
+                    //rtbInformacoesCliente.Text = cliente.Endereco + ", " + cliente.Numero + ", " + cliente.Cidade + " - " + cliente.Uf;
+                }
+            }
+        }
+
+        private void ConsultaDadosCliente(int id)
+        {
+            var cliente = consultaClienteSelecionado(id);
+
+            rtbInformacoesCliente.Text = cliente.Endereco + ", " 
+                + cliente.Numero + ", " 
+                + cliente.Bairro + ", " 
+                + cliente.Cidade + " - " 
+                + cliente.Uf;
+        }
     }
 }

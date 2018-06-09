@@ -189,7 +189,7 @@ AND pedidoItem.Pedido = pedido
             }
         }
 
-        public IList<Pedido> Pesquisar(string nomeRazao, SituacaoPedido situacao, DateTime previsaoPagamento, DateTime pagamento, string ano, string mes )
+        public IList<Pedido> Pesquisar(string nomeRazao, SituacaoPedido situacao, DateTime previsaoPagamento, DateTime pagamento, DateTime cancelamento, string ano, string mes )
         {
             using (ISession session = SessionFactory.AbrirSession())
             {
@@ -315,8 +315,8 @@ AND pedidoItem.Pedido = pedido
                                                     where pedido.Cliente.NomeRazao.Contains(nomeRazao)
                                                     //&& ((pedido.Status & SituacaoPedido.PAGO) == SituacaoPedido.PAGO)
                                                     && Convert.ToInt32(pedido.Status) == Convert.ToInt32(situacao)
-                                                    && pedido.Data_Previsao_Pagamento.Year == Convert.ToInt32(ano)
-                                                    && pedido.Data_Previsao_Pagamento.Month == Convert.ToInt32(mes)
+                                                    && pedido.Data_Cancelamento.Value.Year == Convert.ToInt32(ano)
+                                                    && pedido.Data_Cancelamento.Value.Month == Convert.ToInt32(mes)
                                                     //&& pedido.Data_Previsao_Pagamento.Year + pedido.Data_Previsao_Pagamento.Month == 201803
                                                     //&& pedido.Data_Previsao_Pagamento.Date == previsaoPagamento.Date
                                                     select pedido).ToList();
@@ -338,7 +338,7 @@ AND pedidoItem.Pedido = pedido
                                                  //&& pedido.Data_Previsao_Pagamento.Year == 2018
                                                  //&& pedido.Data_Previsao_Pagamento.Month == 03
                                                  //&& pedido.Data_Previsao_Pagamento.Year + pedido.Data_Previsao_Pagamento.Month == 201803
-                                                 && pedido.Data_Previsao_Pagamento.Date == previsaoPagamento.Date
+                                                 && pedido.Data_Cancelamento.Value.Date == cancelamento.Date
                                                  select pedido).ToList();
                         objetoRetorno = objetoPendenteDia;
                     }
