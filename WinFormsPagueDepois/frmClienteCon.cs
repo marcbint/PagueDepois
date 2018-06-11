@@ -164,7 +164,7 @@ namespace WinFormsPagueDepois
         {
             LoadSituacaoCombo<Situacao>(cboSituacao);
             //criaDataGrid();
-            txtCliente.Focus();
+            txtCliente.Select();
         }
 
         private void Pesquisar()

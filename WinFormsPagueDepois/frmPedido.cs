@@ -160,7 +160,7 @@ namespace WinFormsPagueDepois
                 //btnExcluir.Visible = false;
             }
             //maskDocumento.Focus();
-            cboCliente.Focus();
+            cboCliente.Select();
 
         }
 

@@ -344,12 +344,10 @@ AND pedidoItem.Pedido = pedido
                     }
                 }
 
-
+                /*
                 IList<Pedido> pedidos = new List<Pedido>();
-
-
-
                 pedidos = query.List<Pedido>();
+                */
 
                 string[] grid = new string[2];
 

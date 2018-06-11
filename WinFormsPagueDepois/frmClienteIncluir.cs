@@ -67,7 +67,7 @@ namespace WinFormsPagueDepois
                 cboTipo.Text = "DESCONHECIDO";
                 btnExcluir.Visible = false;
             }
-            maskDocumento.Focus();
+            maskDocumento.Select();
 
         }
 

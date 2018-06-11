@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmPedidoCon));
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.dgvPedidos = new System.Windows.Forms.DataGridView();
@@ -80,8 +80,8 @@
             this.dgvPedidos.AllowUserToDeleteRows = false;
             this.dgvPedidos.AllowUserToResizeColumns = false;
             this.dgvPedidos.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.LightSkyBlue;
-            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.LightSkyBlue;
+            this.dgvPedidos.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvPedidos.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.DisplayedCells;
             this.dgvPedidos.AutoSizeRowsMode = System.Windows.Forms.DataGridViewAutoSizeRowsMode.DisplayedCells;
             this.dgvPedidos.BackgroundColor = System.Drawing.SystemColors.ActiveCaption;

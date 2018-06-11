@@ -49,7 +49,7 @@ namespace WinFormsPagueDepois
             {
                 btnExcluir.Visible = false;
             }
-            txtDescricao.Focus();
+            txtDescricao.Select();
         }
 
         private void btnSalvar_Click(object sender, EventArgs e)

@@ -36,4 +36,3 @@ C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.csp
 C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.csproj.CopyComplete
 C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.dll
 C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.pdb
-C:\Users\b1204126\source\repos\PagueDepois\Repositorio\obj\Debug\Repositorio.csprojResolveAssemblyReference.cache

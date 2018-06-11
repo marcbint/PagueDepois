@@ -96,7 +96,7 @@ namespace WinFormsPagueDepois
                 btnExcluir.Visible = false;
                 btnIncluir.Visible = false;
             }
-            txtCodigo.Focus();
+            txtCodigo.Select();
         }
 
         private void btnSair_Click(object sender, EventArgs e)

@@ -36,7 +36,7 @@ namespace WinFormsPagueDepois
         private void frmPedidoCon_Load(object sender, EventArgs e)
         {
             LoadSituacaoCombo<SituacaoPedido>(cboSituacao);
-            txtCliente.Focus();
+            txtCliente.Select();
             //criaDataGrid();
         }
 
@@ -201,20 +201,27 @@ namespace WinFormsPagueDepois
 
         private void btnPesquisar_Click(object sender, EventArgs e)
         {
-            errorProvider1.Clear();
-            if (txtAno.Text.Trim() == string.Empty && rdbAnoMes.Checked == true)
+            if (rdbAnoMes.Checked == true)
             {
-                errorProvider1.SetError(txtAno, "Informe o ano.");
-                txtAno.Focus();
-                return;
+                errorProvider1.Clear();
+                if (txtAno.Text.Trim() == string.Empty)
+                {
+                    errorProvider1.SetError(txtAno, "Informe o ano.");
+                    txtAno.Focus();
+                    return;
+                }
+                if (txtMes.Text.Trim() == string.Empty)
+                {
+                    errorProvider1.SetError(txtMes, "Informe o mês.");
+                    txtMes.Focus();
+                    return;
+                }
             }
-            if (txtMes.Text.Trim() == string.Empty && rdbAnoMes.Checked == true)
+            else
             {
-                errorProvider1.SetError(txtMes, "Informe o mês.");
-                txtMes.Focus();
-                return;
+                txtAno.Text = null;
+                txtMes.Text = null;
             }
-
             PedidoRelatorio = pesquisar();
         }
 
@@ -269,6 +276,9 @@ namespace WinFormsPagueDepois
             dgvPedidos.Columns[3].HeaderText = "Previsão Pagamento";
             dgvPedidos.Columns[4].HeaderText = "Valor";
             dgvPedidos.Columns[5].HeaderText = "Situação";
+
+            //Formata exibição do dado na coluna
+            dgvPedidos.Columns[4].DefaultCellStyle.Format = "N2";
 
             //Cores
             dgvPedidos.GridColor = Color.Black;
@@ -364,8 +374,10 @@ namespace WinFormsPagueDepois
             {
                 txtAno.Enabled = true;
                 txtAno.Visible = true;
+                txtAno.Text = DateTime.Now.Year.ToString();
                 txtMes.Enabled = true;
                 txtMes.Visible = true;
+                txtMes.Text = DateTime.Now.Month.ToString("00");
                 lblAno.Visible = true;
                 lblMes.Visible = true;
                 lblDataPagamento.Visible = false;

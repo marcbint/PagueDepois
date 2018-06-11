@@ -94,7 +94,7 @@ namespace WinFormsPagueDepois
 
         private void frmLogin_Load(object sender, EventArgs e)
         {
-            txtUsuario.Focus();
+            txtUsuario.Select();
         }
     }
 }
