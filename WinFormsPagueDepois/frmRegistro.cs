@@ -264,6 +264,8 @@ namespace WinFormsPagueDepois
                 btnExcluir.Visible = false;
                 btnSalvar.Visible = true;
             }
+
+            txtNome.Focus();
         }
 
         public static void LoadSituacaoCombo<T>(ComboBox cbo)

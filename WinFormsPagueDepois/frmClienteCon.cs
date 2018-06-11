@@ -163,7 +163,8 @@ namespace WinFormsPagueDepois
         private void frmClienteCon_Load(object sender, EventArgs e)
         {
             LoadSituacaoCombo<Situacao>(cboSituacao);
-            criaDataGrid();
+            //criaDataGrid();
+            txtCliente.Focus();
         }
 
         private void Pesquisar()

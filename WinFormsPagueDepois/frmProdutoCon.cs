@@ -29,6 +29,7 @@ namespace WinFormsPagueDepois
         private void frmProducoCon_Load(object sender, EventArgs e)
         {
             LoadSituacaoCombo<Situacao>(cboSituacao);
+            txtProduto.Focus();
 
             //criaDataGrid();
             

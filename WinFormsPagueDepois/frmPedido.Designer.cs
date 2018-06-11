@@ -42,6 +42,7 @@
             this.lblStatus = new System.Windows.Forms.Label();
             this.dgvPedidoItem = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.rtbInformacoesCliente = new System.Windows.Forms.RichTextBox();
             this.lblDadosCliente = new System.Windows.Forms.Label();
             this.btnIncluirCliente = new System.Windows.Forms.Button();
             this.txtMotivo = new System.Windows.Forms.TextBox();
@@ -61,7 +62,6 @@
             this.btnSalvar = new System.Windows.Forms.Button();
             this.errorProvider1 = new System.Windows.Forms.ErrorProvider(this.components);
             this.dgvPedidoItemBtnRemover = new System.Windows.Forms.DataGridViewButtonColumn();
-            this.rtbInformacoesCliente = new System.Windows.Forms.RichTextBox();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvPedidoItem)).BeginInit();
             this.groupBox1.SuspendLayout();
@@ -238,6 +238,15 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Dados";
             // 
+            // rtbInformacoesCliente
+            // 
+            this.rtbInformacoesCliente.Enabled = false;
+            this.rtbInformacoesCliente.Location = new System.Drawing.Point(166, 55);
+            this.rtbInformacoesCliente.Name = "rtbInformacoesCliente";
+            this.rtbInformacoesCliente.Size = new System.Drawing.Size(464, 37);
+            this.rtbInformacoesCliente.TabIndex = 50;
+            this.rtbInformacoesCliente.Text = "";
+            // 
             // lblDadosCliente
             // 
             this.lblDadosCliente.AutoSize = true;
@@ -269,7 +278,7 @@
             // 
             this.txtMotivo.CharacterCasing = System.Windows.Forms.CharacterCasing.Upper;
             this.txtMotivo.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtMotivo.Location = new System.Drawing.Point(290, 197);
+            this.txtMotivo.Location = new System.Drawing.Point(166, 197);
             this.txtMotivo.MaxLength = 100;
             this.txtMotivo.Name = "txtMotivo";
             this.txtMotivo.Size = new System.Drawing.Size(464, 22);
@@ -442,15 +451,6 @@
             // dgvPedidoItemBtnRemover
             // 
             this.dgvPedidoItemBtnRemover.Name = "dgvPedidoItemBtnRemover";
-            // 
-            // rtbInformacoesCliente
-            // 
-            this.rtbInformacoesCliente.Enabled = false;
-            this.rtbInformacoesCliente.Location = new System.Drawing.Point(166, 55);
-            this.rtbInformacoesCliente.Name = "rtbInformacoesCliente";
-            this.rtbInformacoesCliente.Size = new System.Drawing.Size(464, 37);
-            this.rtbInformacoesCliente.TabIndex = 50;
-            this.rtbInformacoesCliente.Text = "";
             // 
             // frmPedido
             // 

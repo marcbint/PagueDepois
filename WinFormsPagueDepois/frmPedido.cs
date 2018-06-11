@@ -160,6 +160,7 @@ namespace WinFormsPagueDepois
                 //btnExcluir.Visible = false;
             }
             //maskDocumento.Focus();
+            cboCliente.Focus();
 
         }
 
@@ -577,16 +578,17 @@ namespace WinFormsPagueDepois
                     //Cenário que ocorre no processo de edição
 
                     // Valida a opção selecionada no combo situação do pedido
-                    if (valueSituacaoPedido == 2)
+                    if (valueSituacaoPedido == 2) // Pago
                     {
                         pedidoUpdate.Data_Pagamento = Convert.ToDateTime(dtpDataPagamento.Text);
                         pedidoUpdate.Data_Registro_Pagamento = DateTime.Now;
                         pedidoUpdate.Status = situacaoPedido;
                     }
-                    else if (valueSituacaoPedido == 3)
+                    else if (valueSituacaoPedido == 3) //Cancelado
                     {
                         pedidoUpdate.Status = situacaoPedido;
                         pedidoUpdate.Motivo_Cancelamento = txtMotivo.Text.Trim();
+                        pedidoUpdate.Data_Cancelamento = DateTime.Now;
                     }
 
                     pedidoRepo.Alterar(pedidoUpdate);
